@@ -1,0 +1,54 @@
+import React from 'react';
+import { motion } from 'motion/react';
+import { DeBlurText } from '../components/DeBlurText';
+
+import { TextReveal } from '../components/TextReveal';
+
+export const Services = () => {
+  const services = [
+    { title: 'VIDEOGRAPHY', desc: 'Cinematic industrial storytelling with mechanical precision.' },
+    { title: 'PHOTOGRAPHY', desc: 'Capturing the weighted essence of brutalist structures.' },
+    { title: 'GRAPHIC DESIGN', desc: 'Spatial logic applied to visual communication systems.' },
+  ];
+
+  return (
+    <div className="pt-40 mix-blend-difference">
+      <div className="px-8 mb-32">
+        <DeBlurText className="text-[12vw] leading-none">
+          Our<br /><span className="text-neon-pink">Services</span>
+        </DeBlurText>
+      </div>
+
+      <div className="space-y-0">
+        {services.map((service, i) => (
+          <section
+            key={service.title}
+            className="relative h-screen flex flex-col justify-center border-t border-white/10 overflow-hidden group"
+          >
+            <div className="absolute inset-0 z-0 bg-neon-pink opacity-0 group-hover:opacity-5 transition-opacity duration-700" />
+            
+            <div className="px-8 relative z-10">
+              <TextReveal 
+                text={service.title}
+                className="text-[15vw] massive-text leading-none group-hover:tracking-widest transition-all duration-1000"
+              />
+              <motion.p
+                initial={{ y: 20, opacity: 0 }}
+                whileInView={{ y: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+                className="max-w-xl text-xl text-white/60 mt-8"
+              >
+                {service.desc}
+              </motion.p>
+            </div>
+
+            <div className="absolute right-8 bottom-8 text-[20vw] font-black massive-text text-white/5 pointer-events-none">
+              0{i + 1}
+            </div>
+          </section>
+        ))}
+      </div>
+    </div>
+  );
+};

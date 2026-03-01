@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Saira+Extra+Condensed:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Saira Extra Condensed", sans-serif;
+}
+
+:root {
+  --bg: #0a0a0a;
+  --fg: #ffffff;
+  --accent: #f27d26;
+  --neon-pink: #F0A5A4; /* Updated hex code */
+}
+
+.text-neon-pink {
+  color: var(--neon-pink);
+}
+
+.bg-neon-pink {
+  background-color: var(--neon-pink);
+}
+
+.border-neon-pink {
+  border-color: var(--neon-pink);
+}
+
+.shadow-neon-pink {
+  box-shadow: 0 0 15px rgba(240, 165, 164, 0.2);
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  cursor: none;
+  transition: background-color 0.5s ease;
+}
+
+/* Sharp corners for all buttons and cards */
+button, .card, .project-card, .btn, .rounded-full, .rounded-xl, .rounded-2xl {
+  border-radius: 0 !important;
+}
+
+/* Custom button style based on reference image */
+.btn-industrial {
+  @apply px-8 py-3 text-xs uppercase tracking-[0.3em] font-bold border border-white/20 bg-white/5 backdrop-blur-md transition-all hover:bg-white hover:text-black;
+  border-radius: 0;
+}
+
+.btn-industrial-active {
+  @apply bg-white text-black;
+}
+
+/* Industrial Grid Background */
+.industrial-grid {
+  background-image: 
+    linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 16.66vw 100vh;
+}
+
+.column-line {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background-color: rgba(255,255,255,0.1);
+  z-index: 50;
+  pointer-events: none;
+}
+
+/* Hide scrollbar but keep functionality */
+::-webkit-scrollbar {
+  display: none;
+}
+
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.massive-text {
+  font-family: var(--font-display);
+  text-transform: uppercase;
+  line-height: 0.85;
+  letter-spacing: -0.02em;
+}
+
+.de-blur-text {
+  transition: filter 1.2s cubic-bezier(0.22, 1, 0.36, 1), opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
