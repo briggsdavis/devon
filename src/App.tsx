@@ -12,6 +12,7 @@ import { Contact } from './pages/Contact';
 
 import { Footer } from './components/Footer';
 import { DynamicBackground } from './components/DynamicBackground';
+import { GlobalHoverSounds } from './components/GlobalHoverSounds';
 
 const Home = () => (
   <>
@@ -79,6 +80,7 @@ export default function App() {
   return (
     <Router>
       <DynamicBackground>
+        <GlobalHoverSounds />
         <CustomCursor />
         <motion.div
           style={{ opacity: gridOpacity }}

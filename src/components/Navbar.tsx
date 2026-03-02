@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
+import { playNavClick } from '../lib/audioClick';
 
 export const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 w-full z-[1000] px-8 py-6 flex justify-between items-center mix-blend-difference">
-      <Link to="/" className="text-2xl font-black tracking-tighter massive-text text-white group">
+      <Link to="/" onMouseEnter={playNavClick} className="text-2xl font-black tracking-tighter massive-text text-white group">
         DEVON <span className="text-neon-pink group-hover:text-white transition-colors">COLEBANK</span>
       </Link>
 
@@ -14,6 +15,7 @@ export const Navbar = () => {
           <Link
             key={item}
             to={`/${item.toLowerCase()}`}
+            onMouseEnter={playNavClick}
             className="text-xs font-medium uppercase tracking-[0.2em] text-white/70 hover:text-white transition-colors"
           >
             {item}
@@ -23,6 +25,7 @@ export const Navbar = () => {
 
       <Link
         to="/contact"
+        onMouseEnter={playNavClick}
         className="btn-industrial"
       >
         Contact
