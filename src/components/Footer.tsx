@@ -61,7 +61,8 @@ export const Footer = () => {
         <p className="text-[10px] uppercase tracking-widest text-white/20">
           © 2024 Devon Colebank — All Rights Reserved
         </p>
-        <div className="flex gap-8">
+        <div className="flex gap-8 items-center">
+          <a href="https://www.briggsdavis.com" target="_blank" rel="noopener noreferrer" className="text-[10px] uppercase tracking-widest text-white/20 hover:text-white transition-colors">Made by BriggsDavis</a>
           <a href="#" className="text-[10px] uppercase tracking-widest text-white/20 hover:text-white transition-colors">Privacy Policy</a>
           <a href="#" className="text-[10px] uppercase tracking-widest text-white/20 hover:text-white transition-colors">Terms of Service</a>
         </div>
