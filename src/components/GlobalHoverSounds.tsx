@@ -29,7 +29,7 @@ export const GlobalHoverSounds = () => {
       if (btn && !inNav) {
         if (btn !== lastButton.current) {
           lastButton.current = btn;
-          playClick();
+          await playClick();
         }
       } else if (!btn) {
         lastButton.current = null;
