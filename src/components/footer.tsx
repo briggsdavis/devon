@@ -1,10 +1,11 @@
 import { Link } from "react-router"
 
 const SOCIAL_LINKS = [
-  { label: "Instagram", href: "https://www.instagram.com/devoncolebank/" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/devoncolebank/" },
+  { label: "Instagram", href: "https://instagram.com/devoncolebank" },
+  { label: "Facebook", href: "https://www.facebook.com/devoncolebank" },
+  { label: "Twitter", href: "https://twitter.com/devoncolebank" },
+  { label: "LinkedIn", href: "https://www.linkedin.com/in/devon-colebank-8a99b4114/" },
   { label: "YouTube", href: "https://www.youtube.com/@devoncolebank" },
-  { label: "Facebook", href: "https://www.facebook.com/devoncolebankmedia" },
 ]
 
 export const Footer = () => {

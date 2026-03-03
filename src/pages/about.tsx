@@ -8,43 +8,52 @@ import { TextReveal } from "../components/text-reveal"
 export const About = () => {
   const timeline = [
     {
-      year: "2015",
-      event:
-        "Launched Social Satisfaction, starting with music videos for Pittsburgh artists.",
-      img: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&q=80&w=1000",
+      date: "FEB - 2021",
+      client: "TRULY",
+      campaign: '"THIS IS GOLD" CAMPAIGN',
+      role: "DIGITAL CONTENT CREATOR LEAD",
+      description:
+        'Created and developed photo and video content for TRULY distribution in the Pittsburgh region. "#THISISGOLD" Introduces the New TRULY Iced Tea Hard Seltzer. Refreshing hard seltzer meets real brewed tea and fruit flavor for a drink that\'s liquid gold.',
     },
     {
-      year: "2017",
-      event: "Co-founded Vandals Clothing Co. and Endangered Youth.",
-      img: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=1000",
+      date: "OCT - 2020",
+      client: "COORS SELTZER",
+      campaign: "HALLOWEEN CAMPAIGN",
+      role: "DIGITAL CONTENT CREATOR & EVENT COORDINATOR LEAD",
+      description:
+        "Created and developed photo and video content for COORS SELTZER distribution in the Greater Pittsburgh Area region leading and ongoing into the Halloween holiday season. Along with developing and creating ads, also planned and coordinated an event for their target audience in the area, that lead to product being pushed to over 40,000 people.",
     },
     {
-      year: "2019",
-      event: "Began producing campaigns for Coors Light and Red Bull.",
-      img: "https://images.unsplash.com/photo-1489824904134-891ab64532f1?auto=format&fit=crop&q=80&w=1000",
+      date: "2019 - 2020",
+      client: "WINES OF AMERICA",
+      campaign: null,
+      role: "MARKETING DIRECTOR & CREATIVE DIRECTOR",
+      description:
+        "Lead and fulfilled the rebrand of a nationwide wine distribution company. Created a cohesive brand aesthetic across all social media platforms that helps enhance the brand's story. Oversaw the operation of a company's website or email marketing program and provide analytics review.",
     },
     {
-      year: "2020",
-      event:
-        "Produced brand activations for Beam Suntory including Maker's Mark and Basil Hayden.",
-      img: "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&q=80&w=1000",
+      date: "2019 - PRESENT",
+      client: "DOCHERTY:",
+      campaign: "MODEL & TALENT AGENCY",
+      role: "PHOTOGRAPHER",
+      description:
+        "Fashion photographer highlighting model and other clothing products in exciting and memorable ways. Worked closely with models and brands to conceptualize and shoot photos that showcase them as effectively as possible.",
     },
     {
-      year: "2021",
-      event:
-        "Launched House of Balloons, an immersive annual event experience in Pittsburgh.",
-      img: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&q=80&w=1000",
+      date: "2019 - 2020",
+      client: "VANDALS CLOTHING CO.",
+      campaign: null,
+      role: "CONTENT CREATOR & DESIGNER",
+      description:
+        "Developed organic creative content for social media platforms and website. Designed and developed clothing graphics. Creative Direction with project ideas, collaborations, etc.",
     },
     {
-      year: "2022",
-      event: "Joined Richard DeShantz Restaurant Group as Marketing Director.",
-      img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=1000",
-    },
-    {
-      year: "2024",
-      event:
-        "Continued expanding RDRG's brand presence and digital marketing reach.",
-      img: "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?auto=format&fit=crop&q=80&w=1000",
+      date: "2017 - PRESENT",
+      client: "DEVON COLEBANK MEDIA",
+      campaign: null,
+      role: "DIGITAL CONTENT CREATION",
+      description:
+        "Manage and own my current media business, where I do freelance Photography, Videography, Graphic Design, and other media needs for: businesses, entrepreneurs, artists, models and other advertising agencies.",
     },
   ]
 
@@ -150,7 +159,15 @@ export const About = () => {
         </div>
       </div>
 
-      {/* Horizontal Timeline Section */}
+      {/* Portfolio Timeline Section */}
+      <div className="mb-16 px-8">
+        <h2 className="text-[10px] font-bold tracking-widest uppercase text-white/40">
+          PORTFOLIO
+        </h2>
+        <h3 className="mt-2 text-3xl font-bold tracking-tight uppercase md:text-5xl">
+          PAST PROJECTS & CLIENTS
+        </h3>
+      </div>
       <div
         ref={wrapperRef}
         className="relative"
@@ -167,33 +184,26 @@ export const About = () => {
           >
             {timeline.map((item) => (
               <div
-                key={item.year}
+                key={item.client}
                 className="w-[85vw] flex-shrink-0 md:w-[45vw]"
               >
-                <div className="group relative aspect-[16/10] overflow-hidden">
-                  <img
-                    src={item.img}
-                    alt={item.year}
-                    loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-1000 group-hover:scale-110"
-                    referrerPolicy="no-referrer"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                  <div className="absolute bottom-8 left-8">
-                    <span className="massive-text text-neon-pink text-5xl md:text-8xl font-black drop-shadow-2xl">
-                      {item.year}
-                    </span>
-                  </div>
-                </div>
-                <div className="mt-12 pr-12">
-                  <TextReveal
-                    text={item.event}
-                    className="text-4xl font-bold tracking-tight uppercase"
-                  />
-                  <p className="mt-6 max-w-md text-lg leading-relaxed text-white/60">
-                    Each milestone represents a new chapter in the ongoing
-                    pursuit of authentic visual storytelling, pushing craft and
-                    expanding vision.
+                <div className="border-l-2 border-neon-pink pl-8">
+                  <span className="text-neon-pink text-sm font-bold tracking-widest">
+                    {item.date}
+                  </span>
+                  <h4 className="massive-text mt-4 text-5xl font-black uppercase tracking-tight md:text-7xl">
+                    {item.client}
+                  </h4>
+                  {item.campaign && (
+                    <p className="mt-2 text-2xl font-bold uppercase tracking-tight md:text-3xl">
+                      {item.campaign}
+                    </p>
+                  )}
+                  <p className="text-neon-pink mt-6 text-xs font-bold tracking-widest uppercase">
+                    {item.role}
+                  </p>
+                  <p className="mt-6 max-w-lg text-lg leading-relaxed text-white/60">
+                    {item.description}
                   </p>
                 </div>
               </div>
