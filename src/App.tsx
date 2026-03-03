@@ -12,6 +12,8 @@ import { Contact } from './pages/Contact';
 
 import { Footer } from './components/Footer';
 import { DynamicBackground } from './components/DynamicBackground';
+import { GlobalHoverSounds } from './components/GlobalHoverSounds';
+import { scrollToSection } from './lib/scrollToSection';
 
 const Home = () => (
   <>
@@ -22,23 +24,6 @@ const Home = () => (
     <ServiceTrinity />
   </>
 );
-
-const scrollToSection = (id: string) => {
-  const el = document.getElementById(id);
-  if (!el) return;
-  // Walk up offsetParents to compute el's distance from the SmoothScroll fixed div,
-  // which equals the native scrollY needed to bring the section to the viewport top.
-  let top = 0;
-  let current: HTMLElement | null = el;
-  while (current) {
-    top += current.offsetTop;
-    const parent = current.offsetParent as HTMLElement | null;
-    if (!parent) break;
-    if (window.getComputedStyle(parent).position === 'fixed') break;
-    current = parent;
-  }
-  window.scrollTo({ top, behavior: 'smooth' });
-};
 
 const ServicesSidebar = () => {
   const location = useLocation();
@@ -79,6 +64,7 @@ export default function App() {
   return (
     <Router>
       <DynamicBackground>
+        <GlobalHoverSounds />
         <CustomCursor />
         <motion.div
           style={{ opacity: gridOpacity }}

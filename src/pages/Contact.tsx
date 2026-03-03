@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Mail, Phone, MapPin, MessageSquare, ChevronDown } from 'lucide-react';
 import { DeBlurText } from '../components/DeBlurText';
 import { useDynamicText } from '../components/DynamicBackground';
+import { scrollToSection } from '../lib/scrollToSection';
 
 const faqs = [
   { q: "What is your typical project timeline?", a: "Most projects range from 4 to 12 weeks depending on complexity and scope." },
@@ -52,6 +53,14 @@ export const Contact = () => {
               <p className="text-2xl font-medium">+49 176 1234 5678</p>
             </div>
           </div>
+
+          <button
+            onClick={() => scrollToSection('contact-faq')}
+            className="btn-industrial flex items-center gap-3"
+          >
+            Frequently Asked Questions
+            <ChevronDown className="w-4 h-4" />
+          </button>
         </div>
 
         {/* Inquiry Form */}
@@ -91,7 +100,7 @@ export const Contact = () => {
       </div>
 
       {/* FAQ Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-24 border-t border-current/10 pt-24">
+      <div id="contact-faq" className="grid grid-cols-1 lg:grid-cols-3 gap-24 border-t border-current/10 pt-24">
         <div>
           <h2 className="text-8xl massive-text leading-none">FAQ</h2>
         </div>
