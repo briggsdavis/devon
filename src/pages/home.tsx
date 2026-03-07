@@ -186,7 +186,6 @@ const FeaturedProjectCard = ({
     target: ref,
     offset: ["start end", "end start"],
   })
-  const wrapY = useTransform(scrollYProgress, [0, 1], [50, -50])
   const imgY = useTransform(scrollYProgress, [0, 1], [80, -80])
   const isRight = project.align === "right"
 
@@ -195,13 +194,11 @@ const FeaturedProjectCard = ({
       ref={ref}
       className="border-t border-current/10 px-8 py-32 md:px-16"
     >
-      <motion.div
-        style={{ y: wrapY }}
+      <div
         className={`mx-auto flex max-w-7xl flex-col items-center gap-12 ${
           isRight ? "md:flex-row-reverse" : "md:flex-row"
         }`}
       >
-        {/* Image with parallax */}
         <div
           className={`relative aspect-[4/3] w-full overflow-hidden ${project.widthClass}`}
         >
@@ -237,7 +234,7 @@ const FeaturedProjectCard = ({
             precision and purpose.
           </p>
         </div>
-      </motion.div>
+      </div>
     </section>
   )
 }
@@ -330,7 +327,10 @@ const UVPPanel = ({
   )
 
   return (
-    <motion.div style={{ opacity }} className="absolute inset-0 flex h-full flex-col md:flex-row">
+    <motion.div
+      style={{ opacity }}
+      className="absolute inset-0 flex h-full flex-col md:flex-row"
+    >
       {/* Image */}
       <div className="relative h-1/2 w-full overflow-hidden md:h-full md:w-1/2">
         <motion.img

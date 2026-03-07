@@ -30,8 +30,8 @@ export const SmoothScroll = ({ children }: { children: React.ReactNode }) => {
 
   const { scrollY } = useScroll()
   const smoothY = useSpring(scrollY, {
-    damping: 20,
-    stiffness: 80,
+    damping: 28,
+    stiffness: 160,
     mass: 1,
     restDelta: 0.001,
   })

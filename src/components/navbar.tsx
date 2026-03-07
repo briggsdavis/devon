@@ -1,7 +1,7 @@
+import { Menu, X } from "lucide-react"
 import { AnimatePresence, motion } from "motion/react"
 import { useState } from "react"
-import { Link, useLocation } from "react-router"
-import { Menu, X } from "lucide-react"
+import { Link } from "react-router"
 
 const NAV_ITEMS = ["About", "Services", "Portfolio", "Contact"]
 
@@ -9,7 +9,6 @@ const ease = [0.22, 1, 0.36, 1] as [number, number, number, number]
 
 export const Navbar = () => {
   const [open, setOpen] = useState(false)
-  const location = useLocation()
 
   // Close menu on navigation
   const handleLinkClick = () => setOpen(false)
@@ -20,13 +19,9 @@ export const Navbar = () => {
   return (
     <>
       <nav className="fixed top-0 left-0 z-1000 grid w-full grid-cols-2 items-center px-4 py-6 md:grid-cols-3 md:px-8">
-        <Link
-          to="/"
-          className="block"
-          onClick={handleLinkClick}
-        >
+        <Link to="/" className="block w-fit" onClick={handleLinkClick}>
           <img
-            src="/Untitled design (7) (1).png"
+            src="/logo.png"
             alt="Devon Cole Bank"
             className="h-10 w-auto md:h-12"
           />
@@ -46,7 +41,7 @@ export const Navbar = () => {
 
         <Link
           to="/contact"
-          className="btn-industrial justify-self-end hidden md:inline-flex"
+          className="btn-industrial hidden justify-self-end md:inline-flex"
         >
           Contact
         </Link>
@@ -67,7 +62,7 @@ export const Navbar = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4, ease }}
-            className="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-bg"
+            className="bg-bg fixed inset-0 z-[999] flex flex-col items-center justify-center"
           >
             <nav className="flex flex-col items-center gap-8">
               {NAV_ITEMS.map((item, i) => (
@@ -81,7 +76,7 @@ export const Navbar = () => {
                   <Link
                     to={`/${item.toLowerCase()}`}
                     onClick={handleLinkClick}
-                    className="massive-text text-5xl text-white transition-colors hover:text-neon-pink"
+                    className="massive-text hover:text-neon-pink text-5xl text-white transition-colors"
                   >
                     {item}
                   </Link>

@@ -56,7 +56,7 @@ export const Contact = () => {
       </div>
 
       <div className="mb-48">
-        <div className="grid grid-cols-1 gap-16 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-2 gap-16">
           <div className="space-y-4">
             <Mail className="text-neon-pink h-6 w-6" />
             <h4 className="text-[10px] font-bold tracking-widest uppercase opacity-40">
@@ -108,7 +108,9 @@ export const Contact = () => {
       {/* FAQ Section */}
       <div className="grid grid-cols-1 gap-24 border-t border-current/10 pt-24 lg:grid-cols-3">
         <div>
-          <h2 className="massive-text text-5xl md:text-8xl leading-none">FAQ</h2>
+          <h2 className="massive-text text-5xl leading-none md:text-8xl">
+            FAQ
+          </h2>
         </div>
         <div className="space-y-0 lg:col-span-2">
           {faqs.map((faq, i) => (

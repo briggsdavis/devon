@@ -116,7 +116,7 @@ export const About = () => {
           <span className="text-neon-pink">Colebank</span>
         </DeBlurText>
 
-        <div className="mt-24 grid grid-cols-1 gap-8 md:gap-16 md:grid-cols-2">
+        <div className="mt-24 grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-16">
           <div className="space-y-8">
             {/* stagger={0.003} makes the character animation significantly faster */}
             <TextReveal
@@ -161,7 +161,7 @@ export const About = () => {
 
       {/* Portfolio Timeline Section */}
       <div className="mb-16 px-8">
-        <h2 className="text-[10px] font-bold tracking-widest uppercase text-white/40">
+        <h2 className="text-[10px] font-bold tracking-widest text-white/40 uppercase">
           PORTFOLIO
         </h2>
         <h3 className="mt-2 text-3xl font-bold tracking-tight uppercase md:text-5xl">
@@ -187,15 +187,15 @@ export const About = () => {
                 key={item.client}
                 className="w-[85vw] flex-shrink-0 md:w-[45vw]"
               >
-                <div className="border-l-2 border-neon-pink pl-8">
+                <div className="border-neon-pink border-l-2 pl-8">
                   <span className="text-neon-pink text-sm font-bold tracking-widest">
                     {item.date}
                   </span>
-                  <h4 className="massive-text mt-4 text-5xl font-black uppercase tracking-tight md:text-7xl">
+                  <h4 className="massive-text mt-4 text-5xl font-black tracking-tight uppercase md:text-7xl">
                     {item.client}
                   </h4>
                   {item.campaign && (
-                    <p className="mt-2 text-2xl font-bold uppercase tracking-tight md:text-3xl">
+                    <p className="mt-2 text-2xl font-bold tracking-tight uppercase md:text-3xl">
                       {item.campaign}
                     </p>
                   )}

@@ -4,7 +4,10 @@ const SOCIAL_LINKS = [
   { label: "Instagram", href: "https://instagram.com/devoncolebank" },
   { label: "Facebook", href: "https://www.facebook.com/devoncolebank" },
   { label: "Twitter", href: "https://twitter.com/devoncolebank" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/devon-colebank-8a99b4114/" },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/devon-colebank-8a99b4114/",
+  },
   { label: "YouTube", href: "https://www.youtube.com/@devoncolebank" },
 ]
 
@@ -13,9 +16,9 @@ export const Footer = () => {
     <footer className="relative overflow-hidden border-t border-white/10 bg-black px-8 pt-32 pb-12">
       <div className="via-neon-pink/30 absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-transparent to-transparent" />
 
-      <div className="relative z-10 grid grid-cols-1 gap-8 md:gap-12 md:grid-cols-2 lg:gap-16 lg:grid-cols-4">
+      <div className="relative z-10 grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12 lg:grid-cols-4 lg:gap-16">
         <div className="space-y-8">
-          <h2 className="massive-text text-4xl md:text-6xl leading-none">
+          <h2 className="massive-text text-4xl leading-none md:text-6xl">
             Devon
             <br />
             Colebank

@@ -11,9 +11,11 @@ export const CustomCursor = () => {
   const [isHovering, setIsHovering] = useState(false)
   const [hoverText, setHoverText] = useState("")
 
-  const springConfig = { damping: 31, stiffness: 250 }
-  const cursorX = useSpring(mouseX, springConfig)
-  const cursorY = useSpring(mouseY, springConfig)
+  // const springConfig = { damping: 31, stiffness: 250 }
+  // const cursorX = useSpring(mouseX, springConfig)
+  // const cursorY = useSpring(mouseY, springConfig)
+  const cursorX = mouseX
+  const cursorY = mouseY
 
   useEffect(() => {
     if (!hasPointer()) return
