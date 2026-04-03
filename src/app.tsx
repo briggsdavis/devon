@@ -21,7 +21,6 @@ import {
 } from "./pages/home"
 import { NotFound } from "./pages/not-found"
 import { Portfolio } from "./pages/portfolio"
-import { ProjectPage } from "./pages/project"
 import { Services } from "./pages/services"
 
 const Home = () => (
@@ -62,7 +61,6 @@ export default function App() {
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
             <Route path="/portfolio" element={<Portfolio />} />
-            <Route path="/projects/:slug" element={<ProjectPage />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
