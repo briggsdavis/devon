@@ -235,7 +235,7 @@ export const Services = () => (
     </section>
 
     {/* Asymmetric bento grid */}
-    <div className="grid gap-px bg-white/10 md:grid-cols-3">
+    <div className="grid items-start gap-px bg-white/10 md:grid-cols-3">
       {SERVICES.map((service, i) => (
         <ServiceCell key={service.name} service={service} index={i} />
       ))}
