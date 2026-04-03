@@ -5,6 +5,7 @@ import { Footer } from "./components/footer"
 import { Navbar } from "./components/navbar"
 import { SmoothScroll } from "./components/smooth-scroll"
 import { About } from "./pages/about"
+import { CategoryPage } from "./pages/category"
 import { Contact } from "./pages/contact"
 import {
   BrandsCarousel,
@@ -54,6 +55,7 @@ export default function App() {
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
             <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/portfolio/:category" element={<CategoryPage />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
