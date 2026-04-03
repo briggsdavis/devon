@@ -8,42 +8,42 @@ const SERVICES = [
     tag: "Strategy",
     desc: "Shaping the visual language of your brand from concept to final execution.",
     inverted: false,
-    minH: "min-h-[380px]",
+    minH: "min-h-[400px]",
   },
   {
     name: "Photography",
     tag: "Photo",
     desc: "Editorial, commercial, and event photography with an instinct for light.",
     inverted: true,
-    minH: "min-h-[520px]",
+    minH: "min-h-[540px]",   // tallest in row 1
   },
   {
     name: "Branding",
     tag: "Design",
     desc: "Visual identity systems built to outlast trends and grow with you.",
     inverted: true,
-    minH: "min-h-[310px]",
+    minH: "min-h-[300px]",   // shortest in row 1 — Photography > Branding ✓
   },
   {
     name: "Campaigns",
     tag: "Production",
     desc: "End-to-end campaign production for brands that mean business.",
     inverted: false,
-    minH: "min-h-[460px]",
+    minH: "min-h-[430px]",   // middle of row 2 — Campaigns > Production ✓
   },
   {
     name: "Production",
     tag: "Video / Film",
     desc: "Full-service film and video production from brief to final cut.",
     inverted: false,
-    minH: "min-h-[340px]",
+    minH: "min-h-[290px]",   // shortest in row 2
   },
   {
     name: "Motion Graphics",
     tag: "Video / Motion",
     desc: "Animated content that moves — and moves people.",
     inverted: true,
-    minH: "min-h-[490px]",
+    minH: "min-h-[570px]",   // tallest in row 2 — Motion Graphics > Campaigns > Production ✓
   },
   {
     name: "Social Media",
@@ -57,14 +57,14 @@ const SERVICES = [
     tag: "Content",
     desc: "Authentic creator-led content at the scale your brand needs.",
     inverted: false,
-    minH: "min-h-[430px]",
+    minH: "min-h-[460px]",
   },
   {
     name: "Event Launch Marketing",
     tag: "Events",
     desc: "Brand experiences that amplify your launch and live beyond the night.",
     inverted: false,
-    minH: "min-h-[370px]",
+    minH: "min-h-[380px]",
   },
 ]
 
