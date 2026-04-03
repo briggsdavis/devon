@@ -82,6 +82,152 @@ export const Hero = () => {
   )
 }
 
+// ─── Stats Card Grid ──────────────────────────────────────────────────────────
+type StatCardDef = {
+  type: "stat"
+  stat: string
+  title: string
+  subtitle: string
+  rotate: number
+  delay: number
+}
+
+type ImageCardDef = {
+  type: "image"
+  img: string
+  alt: string
+  rotate: number
+  delay: number
+}
+
+type CardDef = StatCardDef | ImageCardDef
+
+const GRID_ROW1: CardDef[] = [
+  {
+    type: "stat",
+    stat: "7+",
+    title: "Years Creating",
+    subtitle: "Est. 2017, Pittsburgh PA",
+    rotate: -2,
+    delay: 0,
+  },
+  {
+    type: "image",
+    img: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&q=80&w=800",
+    alt: "Videography work",
+    rotate: 1.5,
+    delay: 0.08,
+  },
+  {
+    type: "stat",
+    stat: "50+",
+    title: "Brands Elevated",
+    subtitle: "From startups to nationals",
+    rotate: -1,
+    delay: 0.16,
+  },
+  {
+    type: "image",
+    img: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=800",
+    alt: "Photography work",
+    rotate: 2,
+    delay: 0.24,
+  },
+]
+
+const GRID_ROW2: CardDef[] = [
+  {
+    type: "image",
+    img: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&q=80&w=800",
+    alt: "Studio work",
+    rotate: -1.5,
+    delay: 0.32,
+  },
+  {
+    type: "stat",
+    stat: "100+",
+    title: "Projects Delivered",
+    subtitle: "Built with intention, every time",
+    rotate: 1,
+    delay: 0.4,
+  },
+  {
+    type: "image",
+    img: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=800",
+    alt: "Design work",
+    rotate: -2.5,
+    delay: 0.48,
+  },
+]
+
+const GridCard = ({ card }: { card: CardDef }) => {
+  const shared = {
+    style: { borderRadius: "1.25rem", rotate: card.rotate },
+    initial: { opacity: 0, y: 32 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, margin: "-40px" },
+    transition: {
+      duration: 0.65,
+      delay: card.delay,
+      ease: [0.22, 1, 0.36, 1] as [number, number, number, number],
+    },
+  }
+
+  if (card.type === "stat") {
+    return (
+      <motion.div
+        {...shared}
+        className="aspect-[3/4] bg-white text-black p-5 md:p-7 flex flex-col justify-between"
+      >
+        <span className="font-display text-[3.5rem] md:text-[4.5rem] leading-none">
+          {card.stat}
+        </span>
+        <div>
+          <p className="text-xs font-bold tracking-[0.15em] uppercase mb-2">
+            {card.title}
+          </p>
+          <div className="w-full h-px bg-black/20 mb-2" />
+          <p className="text-[11px] text-black/55 tracking-wide">
+            {card.subtitle}
+          </p>
+        </div>
+      </motion.div>
+    )
+  }
+
+  return (
+    <motion.div
+      {...shared}
+      className="aspect-[3/4] overflow-hidden relative"
+    >
+      <img
+        src={card.img}
+        alt={card.alt}
+        loading="lazy"
+        referrerPolicy="no-referrer"
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+    </motion.div>
+  )
+}
+
+export const StatsGrid = () => (
+  <section className="bg-black px-6 py-16 md:px-12 overflow-hidden">
+    <div className="flex flex-col gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {GRID_ROW1.map((card, i) => (
+          <GridCard key={i} card={card} />
+        ))}
+      </div>
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+        {GRID_ROW2.map((card, i) => (
+          <GridCard key={i} card={card} />
+        ))}
+      </div>
+    </div>
+  </section>
+)
+
 // ─── Word Statement (screenshot 1 — stacked words + dividers) ────────────────
 const STATEMENT_WORDS = ["SEVEN", "YEARS", "ONE", "GOAL."]
 

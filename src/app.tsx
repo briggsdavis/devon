@@ -13,6 +13,7 @@ import {
   IntroText,
   ScatteredStatement,
   ServiceTrinity,
+  StatsGrid,
   Ticker,
   ValuePropositions,
   WordStatement,
@@ -25,6 +26,7 @@ import { Services } from "./pages/services"
 const Home = () => (
   <>
     <Hero />
+    <StatsGrid />
     <Ticker />
     <WordStatement />
     <IntroText />
