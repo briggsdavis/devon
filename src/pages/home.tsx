@@ -267,40 +267,51 @@ export const BrandsCarousel = () => {
       </div>
 
       {/* Scrolling track */}
-      <div className="overflow-hidden border-b border-white/10">
-        <motion.div style={{ x: baseX }} className="flex w-max">
+      <div className="overflow-hidden border-b border-white/10 h-40">
+        <motion.div style={{ x: baseX }} className="flex h-full w-max">
           {/* First copy — measured for wrap */}
-          <div ref={trackRef} className="flex">
+          <div ref={trackRef} className="flex h-full">
             {BRANDS.map((brand) => (
-              <div
-                key={brand}
-                className="relative flex items-center px-10 py-10 border-r border-white/10 shrink-0"
-              >
-                {/* diagonal rule */}
-                <div
-                  className="absolute inset-y-0 right-0 w-px bg-white/10 origin-top"
-                  style={{ transform: "skewX(-12deg)" }}
-                />
-                <span className="font-display text-xl tracking-wide text-white/35 uppercase whitespace-nowrap">
-                  {brand}
-                </span>
+              <div key={brand} className="flex items-center h-full shrink-0">
+                {/* Brand name */}
+                <div className="flex items-center px-12 md:px-16 h-full">
+                  <span className="font-display text-xl tracking-wide text-white/40 uppercase whitespace-nowrap">
+                    {brand}
+                  </span>
+                </div>
+                {/* // divider */}
+                <div className="relative h-full w-9 shrink-0">
+                  <div
+                    className="absolute inset-y-0 w-px bg-white/[0.13]"
+                    style={{ left: "8px", transform: "skewX(-12deg)" }}
+                  />
+                  <div
+                    className="absolute inset-y-0 w-px bg-white/[0.13]"
+                    style={{ left: "24px", transform: "skewX(-12deg)" }}
+                  />
+                </div>
               </div>
             ))}
           </div>
           {/* Second copy — seamless loop */}
-          <div aria-hidden className="flex">
+          <div aria-hidden className="flex h-full">
             {BRANDS.map((brand) => (
-              <div
-                key={brand}
-                className="relative flex items-center px-10 py-10 border-r border-white/10 shrink-0"
-              >
-                <div
-                  className="absolute inset-y-0 right-0 w-px bg-white/10 origin-top"
-                  style={{ transform: "skewX(-12deg)" }}
-                />
-                <span className="font-display text-xl tracking-wide text-white/35 uppercase whitespace-nowrap">
-                  {brand}
-                </span>
+              <div key={brand} className="flex items-center h-full shrink-0">
+                <div className="flex items-center px-12 md:px-16 h-full">
+                  <span className="font-display text-xl tracking-wide text-white/40 uppercase whitespace-nowrap">
+                    {brand}
+                  </span>
+                </div>
+                <div className="relative h-full w-9 shrink-0">
+                  <div
+                    className="absolute inset-y-0 w-px bg-white/[0.13]"
+                    style={{ left: "8px", transform: "skewX(-12deg)" }}
+                  />
+                  <div
+                    className="absolute inset-y-0 w-px bg-white/[0.13]"
+                    style={{ left: "24px", transform: "skewX(-12deg)" }}
+                  />
+                </div>
               </div>
             ))}
           </div>
