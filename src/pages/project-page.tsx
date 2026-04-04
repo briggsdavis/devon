@@ -82,7 +82,7 @@ export const ProjectPage = () => {
             <motion.p
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: true, margin: "-150px" }}
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
               className="text-base leading-relaxed text-white/55 md:text-lg"
             >
@@ -163,7 +163,7 @@ const ImageCard = ({
     className={`group relative block overflow-hidden ${className}`}
     initial={{ opacity: 0, y: 24 }}
     whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-40px" }}
+    viewport={{ once: true, margin: "-150px" }}
     transition={{
       duration: 0.7,
       delay: (index % 3) * 0.08,

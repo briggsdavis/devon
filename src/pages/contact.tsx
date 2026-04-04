@@ -321,7 +321,7 @@ const BlurIn = ({
     variants={blurInVariants}
     initial="hidden"
     whileInView="visible"
-    viewport={{ once: true, margin: "-60px" }}
+    viewport={{ once: true, margin: "-150px" }}
     transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay }}
     className={className}
   >

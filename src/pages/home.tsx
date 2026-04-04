@@ -156,7 +156,7 @@ const ServicesGridCard = ({ card }: { card: ServiceCardDef }) => (
       className="relative aspect-[3/4] overflow-hidden"
       initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-40px" }}
+      viewport={{ once: true, margin: "-150px" }}
       transition={{
         duration: 0.65,
         delay: card.delay,
@@ -373,7 +373,7 @@ export const WordStatement = () => (
           className={`border-b border-white/20 px-6 flex items-end ${isRight ? "justify-end" : "justify-start"}`}
           initial={{ opacity: 0, x: isRight ? 40 : -40 }}
           whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-150px" }}
           transition={{ duration: 0.7, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
         >
           <span className="massive-text text-[18vw] leading-[0.88] select-none">
@@ -412,7 +412,7 @@ export const CampaignStatement = () => (
           className={`border-b border-white/20 px-6 flex items-end ${isRight ? "justify-end" : "justify-start"}`}
           initial={{ opacity: 0, x: isRight ? 40 : -40 }}
           whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-150px" }}
           transition={{ duration: 0.7, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
         >
           <span className="massive-text text-[18vw] leading-[0.88] select-none">
@@ -658,7 +658,7 @@ const WordReveal = ({
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, margin: "-40px" }}
+      viewport={{ once: true, margin: "-150px" }}
     >
       {text.split(" ").map((word, i) => (
         <span key={i} className="mr-[0.3em] inline-block overflow-hidden">
@@ -686,7 +686,7 @@ export const IntroText = () => {
             className="block text-[9px] font-bold tracking-[0.4em] text-white/40 uppercase"
             initial={{ y: "110%" }}
             whileInView={{ y: "0%" }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-150px" }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
           >
             The Philosophy
@@ -1042,7 +1042,7 @@ const ServiceCard = ({
       className={`group min-w-0 flex-1 ${service.offsetClass}`}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
+      viewport={{ once: true, margin: "-150px" }}
       transition={{ duration: 0.7, delay: index * 0.12 }}
     >
       <div className="relative mb-8 aspect-[3/4] overflow-hidden">

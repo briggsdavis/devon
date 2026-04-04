@@ -20,7 +20,7 @@ const ProjectCard = ({
     className={`group relative overflow-hidden ${className}`}
     initial={{ opacity: 0, y: 24 }}
     whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-40px" }}
+    viewport={{ once: true, margin: "-150px" }}
     transition={{
       duration: 0.7,
       delay: index * 0.08,
