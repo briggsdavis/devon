@@ -562,19 +562,38 @@ export const CampaignStatement = () => (
 )
 
 // ─── Featured Cascade (3 cascading parallax images → portfolio) ──────────────
-const CASCADE_IMGS = [
-  "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=1200",
-  "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&q=80&w=1200",
-  "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=1200",
+const CASCADE_ITEMS = [
+  {
+    src: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&q=80&w=1200",
+    title: "Kinetic Light",
+    descriptor: "Photography",
+    tags: ["Landscape", "Editorial"],
+  },
+  {
+    src: "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&q=80&w=1200",
+    title: "Frame Study",
+    descriptor: "Videography",
+    tags: ["Commercial", "Brand"],
+  },
+  {
+    src: "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&q=80&w=1200",
+    title: "Signal & Form",
+    descriptor: "Graphic Design",
+    tags: ["Branding", "Identity"],
+  },
 ]
 
-const CascadeImg = ({ src, index }: { src: string; index: number }) => {
+const CascadeImg = ({
+  item,
+  index,
+}: {
+  item: (typeof CASCADE_ITEMS)[0]
+  index: number
+}) => {
   const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] })
   const imgY = useTransform(scrollYProgress, [0, 1], [60, -60])
 
-  // Left tallest, middle shorter, right shortest — descending in both height and vertical position
-  const aspectRatios = ["aspect-[3/5]", "aspect-[3/4]", "aspect-[4/5]"]
   const vertOffsets = [0, 80, 160] // px — cascades downward
 
   return (
@@ -588,16 +607,45 @@ const CascadeImg = ({ src, index }: { src: string; index: number }) => {
       transition={{ duration: 0.9, delay: index * 0.15, ease: [0.22, 1, 0.36, 1] }}
     >
       <Link to="/portfolio" className="block group">
-        <div className={`relative overflow-hidden ${aspectRatios[index]}`}>
+        <div className="relative aspect-[3/4] overflow-hidden">
           <motion.img
             style={{ y: imgY, height: "calc(100% + 120px)", top: "-60px" }}
-            src={src}
-            alt={`Featured project ${index + 1}`}
+            src={item.src}
+            alt={item.title}
             loading="lazy"
             className="absolute w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
             referrerPolicy="no-referrer"
           />
-          <div className="absolute inset-0 bg-black/20 transition-colors duration-500 group-hover:bg-black/10" />
+          {/* Gradient */}
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-3/4 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+
+          {/* Bottom overlay — title + tags */}
+          <div className="absolute inset-x-0 bottom-0 p-5">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="flex items-center gap-1.5 bg-black/85 px-2.5 py-1 text-[9px] font-bold tracking-[0.22em] uppercase text-white backdrop-blur-sm">
+                <span className="h-[6px] w-[6px] shrink-0 rounded-full bg-white/80" />
+                {item.title}
+              </span>
+              <span className="bg-black/60 px-2.5 py-1 text-[9px] font-bold tracking-[0.22em] uppercase text-white/45 backdrop-blur-sm">
+                {item.descriptor}
+              </span>
+              {item.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="hidden border border-white/20 px-2.5 py-1 text-[9px] font-bold tracking-[0.22em] uppercase text-white/40 backdrop-blur-sm sm:block"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Top-right "View Work" chip — hover only */}
+          <div className="absolute right-4 top-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            <span className="block bg-white px-3 py-1.5 text-[9px] font-bold tracking-widest uppercase text-black">
+              View Work →
+            </span>
+          </div>
         </div>
       </Link>
     </motion.div>
@@ -625,8 +673,8 @@ export const FeaturedCascade = () => (
 
       {/* Cascade */}
       <div className="flex items-start gap-5 md:gap-8">
-        {CASCADE_IMGS.map((src, i) => (
-          <CascadeImg key={i} src={src} index={i} />
+        {CASCADE_ITEMS.map((item, i) => (
+          <CascadeImg key={i} item={item} index={i} />
         ))}
       </div>
 

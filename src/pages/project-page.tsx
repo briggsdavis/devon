@@ -55,9 +55,9 @@ export const ProjectPage = () => {
 
       {/* Overview — descriptor + tags + description paragraph */}
       <section className="border-b border-white/10 px-8 py-20 md:px-16">
-        {/* Top row: descriptor label + tags */}
-        <div className="mb-16 flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
-          <div>
+        {/* Top row: descriptor/tags + project overview — 4-col grid aligns overview with Execution below */}
+        <div className="mb-16 grid grid-cols-1 gap-10 md:grid-cols-4 md:gap-8">
+          <div className="md:col-span-2">
             <span className="mb-3 block text-[9px] font-bold tracking-[0.4em] uppercase text-white/35">
               {project.descriptor}
             </span>
@@ -75,7 +75,7 @@ export const ProjectPage = () => {
               </span>
             </div>
           </div>
-          <div className="md:max-w-[56%]">
+          <div className="md:col-span-2">
             <span className="mb-4 block text-[9px] font-bold tracking-[0.4em] uppercase text-white/35">
               Project Overview
             </span>
