@@ -152,7 +152,7 @@ const ALL_SERVICES: ServiceCardDef[] = [
 const ServicesGridCard = ({ card }: { card: ServiceCardDef }) => (
   <Link to="/services" className="group block">
     <motion.div
-      style={{ borderRadius: "1.25rem", rotate: card.rotate }}
+      style={{ borderRadius: 0, rotate: card.rotate }}
       className="relative aspect-[3/4] overflow-hidden"
       initial={{ opacity: 0, y: 32 }}
       whileInView={{ opacity: 1, y: 0 }}
