@@ -202,7 +202,7 @@ const ServiceCell = ({
                     service.inverted ? "text-black/60" : "text-white/60"
                   }`}
                 >
-                  CR Portfolio
+                  Visit Portfolio
                 </Link>
               </motion.div>
             </motion.ul>
