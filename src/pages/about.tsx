@@ -1,63 +1,175 @@
-import { motion, useMotionValue, useTransform } from "motion/react"
+import { AnimatePresence, motion, useMotionValue, useScroll, useTransform } from "motion/react"
 import { useEffect, useRef, useState } from "react"
-import { AsymmetricalSection } from "../components/asymmetrical-section"
-import { DeBlurText } from "../components/de-blur-text"
+import { Link } from "react-router"
+import { AboutHero } from "../components/about-hero"
 import { useSmoothScroll } from "../components/smooth-scroll"
-import { TextReveal } from "../components/text-reveal"
-import { ValuePropositions } from "./home"
+
+// Splits text into sentences and blurs each in on scroll
+const BlurInLines = ({ text, className, align }: { text: string; className?: string; align?: string }) => {
+  const sentences = text.split(/(?<=[.!?])\s+/).filter(Boolean)
+  return (
+    <div className={className}>
+      {sentences.map((sentence, i) => (
+        <motion.p
+          key={i}
+          className={`mb-4 text-xl font-light leading-loose text-white/70 ${align ?? ""}`}
+          initial={{ opacity: 0, filter: "blur(10px)", y: 10 }}
+          whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+          viewport={{ once: true, margin: "-40px" }}
+          transition={{ duration: 1, delay: i * 0.18, ease: [0.22, 1, 0.36, 1] }}
+        >
+          {sentence}
+        </motion.p>
+      ))}
+    </div>
+  )
+}
+
+const values = [
+  {
+    label: "BUSINESS VALUE",
+    img: "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&q=80&w=600",
+    offset: "mt-0",
+    delay: 0,
+    body: "We measure success in reservations, not impressions. Every campaign is built around a specific business objective — whether that's growing your weekday covers, launching a new concept, or repositioning your brand.",
+  },
+  {
+    label: "CULTURE",
+    img: "https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&q=80&w=600",
+    offset: "mt-20",
+    delay: 0.1,
+    body: "Culture isn't a backdrop — it's your product. We build content that makes people feel like they're already part of your world, translating your hospitality vision into storytelling that drives aspiration and belonging.",
+  },
+  {
+    label: "DYNAMICS",
+    img: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&q=80&w=600",
+    offset: "mt-10",
+    delay: 0.2,
+    body: "The market doesn't wait. Our in-house production model means we can turn a campaign concept around in days, not weeks — keeping your brand responsive to trends, seasons, and competitive shifts without losing cohesion.",
+  },
+  {
+    label: "CREATIVITY",
+    img: "https://images.unsplash.com/photo-1572044162444-ad60f128bdea?auto=format&fit=crop&q=80&w=600",
+    offset: "mt-32",
+    delay: 0.3,
+    body: "Originality is what makes people stop scrolling. We develop visual identities and campaign narratives unique to each brand — never templated, never recycled. Every element is intentional and designed to make your brand unmistakable.",
+  },
+]
+
+const timeline = [
+  {
+    date: "FEB - 2021",
+    client: "TRULY",
+    campaign: '"THIS IS GOLD" CAMPAIGN',
+    role: "DIGITAL CONTENT CREATOR LEAD",
+    description:
+      'Created and developed photo and video content for TRULY distribution in the Pittsburgh region. "#THISISGOLD" Introduces the New TRULY Iced Tea Hard Seltzer. Refreshing hard seltzer meets real brewed tea and fruit flavor for a drink that\'s liquid gold.',
+  },
+  {
+    date: "OCT - 2020",
+    client: "COORS SELTZER",
+    campaign: "HALLOWEEN CAMPAIGN",
+    role: "DIGITAL CONTENT CREATOR & EVENT COORDINATOR LEAD",
+    description:
+      "Created and developed photo and video content for COORS SELTZER distribution in the Greater Pittsburgh Area region leading and ongoing into the Halloween holiday season. Along with developing and creating ads, also planned and coordinated an event for their target audience in the area, that lead to product being pushed to over 40,000 people.",
+  },
+  {
+    date: "2019 - 2020",
+    client: "WINES OF AMERICA",
+    campaign: null,
+    role: "MARKETING DIRECTOR & CREATIVE DIRECTOR",
+    description:
+      "Lead and fulfilled the rebrand of a nationwide wine distribution company. Created a cohesive brand aesthetic across all social media platforms that helps enhance the brand's story. Oversaw the operation of a company's website or email marketing program and provide analytics review.",
+  },
+  {
+    date: "2019 - PRESENT",
+    client: "DOCHERTY:",
+    campaign: "MODEL & TALENT AGENCY",
+    role: "PHOTOGRAPHER",
+    description:
+      "Fashion photographer highlighting model and other clothing products in exciting and memorable ways. Worked closely with models and brands to conceptualize and shoot photos that showcase them as effectively as possible.",
+  },
+  {
+    date: "2019 - 2020",
+    client: "VANDALS CLOTHING CO.",
+    campaign: null,
+    role: "CONTENT CREATOR & DESIGNER",
+    description:
+      "Developed organic creative content for social media platforms and website. Designed and developed clothing graphics. Creative Direction with project ideas, collaborations, etc.",
+  },
+  {
+    date: "2017 - PRESENT",
+    client: "SOCIAL SATISFACTION",
+    campaign: null,
+    role: "FULL-SERVICE MARKETING AGENCY",
+    description:
+      "A full-service marketing agency delivering photography, videography, graphic design, creative direction, and brand strategy for businesses, entrepreneurs, artists, and advertising agencies.",
+  },
+]
+
+const ValueCard = ({
+  value,
+}: {
+  value: (typeof values)[0]
+}) => {
+  const [isOpen, setIsOpen] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  })
+
+  const imgY = useTransform(scrollYProgress, [0, 1], ["15%", "-15%"])
+
+  return (
+    <motion.div
+      ref={containerRef}
+      className={`flex-1 ${value.offset} cursor-pointer text-left`}
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-80px" }}
+      transition={{ duration: 0.7, delay: value.delay, ease: [0.22, 1, 0.36, 1] }}
+      onClick={() => setIsOpen((v) => !v)}
+    >
+      {/* Image with parallax */}
+      <div className="relative aspect-[2/3] w-full overflow-hidden">
+        <motion.img
+          src={value.img}
+          alt={value.label}
+          className="absolute inset-0 h-[130%] w-full object-cover"
+          style={{ y: imgY, top: "-15%" }}
+        />
+        {/* Tag overlay */}
+        <div className="absolute bottom-3 left-3 z-10">
+          <span className="flex items-center gap-1.5 bg-black/85 px-2.5 py-1 text-[9px] font-bold tracking-[0.22em] uppercase text-white backdrop-blur-sm">
+            <span className="h-[6px] w-[6px] shrink-0 rounded-full bg-white/80" />
+            {value.label}
+          </span>
+        </div>
+      </div>
+
+      {/* Inline expand drawer */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            className="overflow-hidden"
+          >
+            <p className="pt-4 text-xs leading-relaxed text-white/55">
+              {value.body}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  )
+}
 
 export const About = () => {
-  const timeline = [
-    {
-      date: "FEB - 2021",
-      client: "TRULY",
-      campaign: '"THIS IS GOLD" CAMPAIGN',
-      role: "DIGITAL CONTENT CREATOR LEAD",
-      description:
-        'Created and developed photo and video content for TRULY distribution in the Pittsburgh region. "#THISISGOLD" Introduces the New TRULY Iced Tea Hard Seltzer. Refreshing hard seltzer meets real brewed tea and fruit flavor for a drink that\'s liquid gold.',
-    },
-    {
-      date: "OCT - 2020",
-      client: "COORS SELTZER",
-      campaign: "HALLOWEEN CAMPAIGN",
-      role: "DIGITAL CONTENT CREATOR & EVENT COORDINATOR LEAD",
-      description:
-        "Created and developed photo and video content for COORS SELTZER distribution in the Greater Pittsburgh Area region leading and ongoing into the Halloween holiday season. Along with developing and creating ads, also planned and coordinated an event for their target audience in the area, that lead to product being pushed to over 40,000 people.",
-    },
-    {
-      date: "2019 - 2020",
-      client: "WINES OF AMERICA",
-      campaign: null,
-      role: "MARKETING DIRECTOR & CREATIVE DIRECTOR",
-      description:
-        "Lead and fulfilled the rebrand of a nationwide wine distribution company. Created a cohesive brand aesthetic across all social media platforms that helps enhance the brand's story. Oversaw the operation of a company's website or email marketing program and provide analytics review.",
-    },
-    {
-      date: "2019 - PRESENT",
-      client: "DOCHERTY:",
-      campaign: "MODEL & TALENT AGENCY",
-      role: "PHOTOGRAPHER",
-      description:
-        "Fashion photographer highlighting model and other clothing products in exciting and memorable ways. Worked closely with models and brands to conceptualize and shoot photos that showcase them as effectively as possible.",
-    },
-    {
-      date: "2019 - 2020",
-      client: "VANDALS CLOTHING CO.",
-      campaign: null,
-      role: "CONTENT CREATOR & DESIGNER",
-      description:
-        "Developed organic creative content for social media platforms and website. Designed and developed clothing graphics. Creative Direction with project ideas, collaborations, etc.",
-    },
-    {
-      date: "2017 - PRESENT",
-      client: "SOCIAL SATISFACTION",
-      campaign: null,
-      role: "FULL-SERVICE MARKETING AGENCY",
-      description:
-        "A full-service marketing agency delivering photography, videography, graphic design, creative direction, and brand strategy for businesses, entrepreneurs, artists, and advertising agencies.",
-    },
-  ]
-
   const wrapperRef = useRef<HTMLDivElement>(null)
   const horizontalRef = useRef<HTMLDivElement>(null)
   const [scrollDistance, setScrollDistance] = useState(0)
@@ -76,16 +188,12 @@ export const About = () => {
         wrapperTopRef.current = rect.top + (smoothY?.get() ?? 0)
       }
       if (horizontalRef.current) {
-        const dist = Math.max(
-          0,
-          horizontalRef.current.scrollWidth - window.innerWidth,
-        )
+        const dist = Math.max(0, horizontalRef.current.scrollWidth - window.innerWidth)
         scrollDistanceRef.current = dist
         setScrollDistance(dist)
       }
     }
-
-    requestAnimationFrame(measure)
+    requestAnimationFrame(() => requestAnimationFrame(measure))
     window.addEventListener("resize", measure)
     return () => window.removeEventListener("resize", measure)
   }, [smoothY])
@@ -109,122 +217,104 @@ export const About = () => {
   })
 
   return (
-    <div className="pt-40">
-      <div className="mb-32 px-8">
-        <DeBlurText className="mb-8 text-[12vw] leading-none">
-          Social
-          <br />
-          <span className="text-white/60">Satisfaction</span>
-        </DeBlurText>
+    <>
+      <AboutHero />
 
-        <div className="mt-24 grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-16">
-          <div className="space-y-8">
-            {/* stagger={0.003} makes the character animation significantly faster */}
-            <TextReveal
-              as="p"
-              text="Social Satisfaction is a full-service marketing agency specialising in creative direction, brand identity, and commercial production. Our work spans videography, photography, and graphic design for brands like Coors Light, Red Bull, Maker's Mark, and Truly Hard Seltzer."
-              className="text-2xl leading-relaxed font-light"
-              stagger={0.003}
-              immediate
+      <div className="pt-24">
+        {/* Three staggered paragraphs — line-by-line blur-in */}
+        <div className="mb-32 px-8 md:px-16 lg:px-24">
+          <div className="flex justify-start">
+            <BlurInLines
+              className="about-glow-text max-w-sm"
+              text="Social Satisfaction, founded by Devon Colebank, transforms hospitality and lifestyle brands through cultural storytelling. We blend nostalgia with modern innovation to create resonant identities that bridge the gap between trend-forward messaging and striking visuals."
             />
           </div>
-          <div className="space-y-8 leading-relaxed">
-            <p className="text-white/60">
-              We believe great marketing starts with a single question: what do
-              you want people to feel? Every campaign, every frame, every brand
-              identity we build is engineered around that answer.
-            </p>
-            <p className="text-white/60">
-              From national product launches to intimate brand activations, our
-              team brings strategic thinking and cinematic execution to every
-              brief. Bold ideas. Precise craft. Results that last.
-            </p>
-            <div className="flex gap-12 pt-8">
-              <div>
-                <h4 className="text-white/60 mb-2 text-[10px] font-bold tracking-widest uppercase">
-                  Type
-                </h4>
-                <p>Marketing Agency</p>
-              </div>
-              <div>
-                <h4 className="text-white/60 mb-2 text-[10px] font-bold tracking-widest uppercase">
-                  Focus
-                </h4>
-                <p>Creative Direction & Brand Strategy</p>
-              </div>
-            </div>
+          <div className="mt-32 flex justify-end">
+            <BlurInLines
+              className="about-glow-text max-w-sm text-right"
+              text={'We replace \u201cshoot and share\u201d tactics with performance-driven campaigns. As an end-to-end partner, we manage everything from ideation to execution. This streamlined structure ensures every effort is intentional, cohesive, and designed to drive reservations.'}
+              align="text-right"
+            />
+          </div>
+          <div className="mt-32 flex justify-center">
+            <BlurInLines
+              className="about-glow-text max-w-sm"
+              text="By integrating strategy with internal production, we eliminate fragmented communication and multiple vendors. Every piece of content serves a business objective. The result is a consistent, optimized rollout that delivers measurable brand loyalty."
+              align="text-center"
+            />
           </div>
         </div>
-      </div>
 
-      {/* Portfolio Timeline Section */}
-      <div className="mb-16 px-8">
-        <h2 className="text-[10px] font-bold tracking-widest text-white/40 uppercase">
-          PORTFOLIO
-        </h2>
-        <h3 className="mt-2 text-3xl font-bold tracking-tight uppercase md:text-5xl">
-          PAST PROJECTS & CLIENTS
-        </h3>
-      </div>
-      <div
-        ref={wrapperRef}
-        className="relative"
-        style={{ height: `calc(${scrollDistance}px + 100vh)` }}
-      >
-        <motion.div
-          style={{ y: pinY }}
-          className="flex h-screen items-center overflow-hidden"
+        {/* Portfolio Timeline — header pinned inside scrolling section */}
+        <div
+          ref={wrapperRef}
+          className="relative"
+          style={{ height: `calc(${scrollDistance}px + 100vh)` }}
         >
           <motion.div
-            ref={horizontalRef}
-            style={{ x }}
-            className="flex gap-24 px-8"
+            style={{ y: pinY }}
+            className="flex h-screen flex-col overflow-hidden"
           >
-            {timeline.map((item) => (
-              <div
-                key={item.client}
-                className="w-[85vw] flex-shrink-0 md:w-[45vw]"
+            {/* Compact header */}
+            <div className="flex-shrink-0 border-b border-white/10 px-8 pt-3 pb-[3px]">
+              <h2 className="text-[10px] font-bold tracking-widest text-white/40 uppercase">
+                PORTFOLIO
+              </h2>
+              <h3 className="mt-1 text-3xl font-bold tracking-tight uppercase md:text-5xl">
+                PAST PROJECTS & CLIENTS
+              </h3>
+            </div>
+            {/* Scrolling cards */}
+            <div className="flex flex-1 items-center overflow-hidden">
+              <motion.div
+                ref={horizontalRef}
+                style={{ x }}
+                className="flex gap-24 px-8"
               >
-                <div className="border-white/20 border-l-2 pl-8">
-                  <span className="text-white/60 text-sm font-bold tracking-widest">
-                    {item.date}
-                  </span>
-                  <h4 className="massive-text mt-4 text-5xl font-black tracking-tight uppercase md:text-7xl">
-                    {item.client}
-                  </h4>
-                  {item.campaign && (
-                    <p className="mt-2 text-2xl font-bold tracking-tight uppercase md:text-3xl">
-                      {item.campaign}
-                    </p>
-                  )}
-                  <p className="text-white/60 mt-6 text-xs font-bold tracking-widest uppercase">
-                    {item.role}
-                  </p>
-                  <p className="mt-6 max-w-lg text-lg leading-relaxed text-white/60">
-                    {item.description}
-                  </p>
-                </div>
-              </div>
-            ))}
+                {timeline.map((item) => (
+                  <div key={item.client} className="w-[85vw] flex-shrink-0 md:w-[45vw]">
+                    <div className="border-white/20 border-l-2 pl-8">
+                      <span className="text-white/60 text-sm font-bold tracking-widest">
+                        {item.date}
+                      </span>
+                      <h4 className="massive-text mt-4 text-5xl font-black tracking-tight uppercase md:text-7xl">
+                        {item.client}
+                      </h4>
+                      {item.campaign && (
+                        <p className="mt-2 text-2xl font-bold tracking-tight uppercase md:text-3xl">
+                          {item.campaign}
+                        </p>
+                      )}
+                      <p className="text-white/60 mt-6 text-xs font-bold tracking-widest uppercase">
+                        {item.role}
+                      </p>
+                      <p className="mt-6 max-w-lg text-lg leading-relaxed text-white/60">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </motion.div>
+            </div>
           </motion.div>
-        </motion.div>
+        </div>
+
+        {/* Values Images — four staggered portrait images, click to expand text */}
+        <div className="px-8 py-16 md:py-24">
+          <div className="flex items-start gap-3 md:gap-5">
+            {values.map((value) => (
+              <ValueCard key={value.label} value={value} />
+            ))}
+          </div>
+        </div>
+
+        {/* Discover Our Services CTA */}
+        <div className="flex justify-center border-t border-white/10 py-24">
+          <Link to="/services" className="btn-industrial">
+            Discover Our Services
+          </Link>
+        </div>
       </div>
-
-      <AsymmetricalSection
-        img="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&q=80&w=1200"
-        title="Portrait Mastery"
-        subtitle="Editorial Photography"
-        align="right"
-      />
-
-      <AsymmetricalSection
-        img="https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?auto=format&fit=crop&q=80&w=1200"
-        title="Cinematic Vision"
-        subtitle="Documentary Film"
-        align="left"
-      />
-
-      <ValuePropositions />
-    </div>
+    </>
   )
 }
