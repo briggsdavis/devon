@@ -1,5 +1,7 @@
 import { AnimatePresence, motion, useMotionValue, useTransform } from "motion/react"
 import { useEffect, useRef, useState } from "react"
+import { createPortal } from "react-dom"
+import { Link } from "react-router"
 import { AboutHero } from "../components/about-hero"
 import { useSmoothScroll } from "../components/smooth-scroll"
 
@@ -278,65 +280,75 @@ export const About = () => {
             ))}
           </div>
         </div>
+
+        {/* Discover Our Services CTA */}
+        <div className="flex justify-center border-t border-white/10 py-24">
+          <Link to="/services" className="btn-industrial">
+            Discover Our Services
+          </Link>
+        </div>
       </div>
 
-      {/* Value modal */}
-      <AnimatePresence>
-        {activeValue && activeValueData && (
-          <>
-            {/* Backdrop */}
-            <motion.div
-              className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              onClick={() => setActiveValue(null)}
-            />
-            {/* Modal */}
-            <motion.div
-              className="fixed inset-0 z-50 flex items-center justify-center p-6 pointer-events-none"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-            >
+      {/* Value modal — rendered via portal so CSS transforms on SmoothScroll don't break position:fixed */}
+      {createPortal(
+        <AnimatePresence>
+          {activeValue && activeValueData && (
+            <>
+              {/* Backdrop */}
               <motion.div
-                className="pointer-events-auto relative flex w-full max-w-2xl flex-col overflow-hidden bg-black border border-white/10 md:flex-row"
-                initial={{ scale: 0.92, y: 30 }}
-                animate={{ scale: 1, y: 0 }}
-                exit={{ scale: 0.92, y: 30 }}
-                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-                onClick={(e) => e.stopPropagation()}
+                className="fixed inset-0 z-[9999] bg-black/80 backdrop-blur-sm"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                onClick={() => setActiveValue(null)}
+              />
+              {/* Modal */}
+              <motion.div
+                className="fixed inset-0 z-[9999] flex items-center justify-center p-6 pointer-events-none"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
               >
-                {/* Image */}
-                <div className="aspect-[3/2] w-full flex-shrink-0 overflow-hidden md:aspect-auto md:w-56">
-                  <img
-                    src={activeValueData.img}
-                    alt={activeValueData.label}
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-                {/* Content */}
-                <div className="flex flex-1 flex-col justify-between p-8">
-                  <div>
-                    <p className="mb-4 text-[10px] font-bold tracking-[0.4em] text-white/40 uppercase">
-                      Our approach
-                    </p>
-                    <h3 className="massive-text mb-6 text-3xl text-white">{activeValueData.label}</h3>
-                    <p className="text-sm leading-relaxed text-white/60">{activeValueData.body}</p>
+                <motion.div
+                  className="pointer-events-auto relative flex w-full max-w-2xl flex-col overflow-hidden bg-black border border-white/10 md:flex-row"
+                  initial={{ scale: 0.92, y: 30 }}
+                  animate={{ scale: 1, y: 0 }}
+                  exit={{ scale: 0.92, y: 30 }}
+                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  {/* Image */}
+                  <div className="aspect-[3/2] w-full flex-shrink-0 overflow-hidden md:aspect-auto md:w-56">
+                    <img
+                      src={activeValueData.img}
+                      alt={activeValueData.label}
+                      className="h-full w-full object-cover"
+                    />
                   </div>
-                  <button
-                    className="mt-8 self-start text-[10px] font-bold tracking-[0.3em] text-white/30 uppercase hover:text-white/60 transition-colors"
-                    onClick={() => setActiveValue(null)}
-                  >
-                    Close ×
-                  </button>
-                </div>
+                  {/* Content */}
+                  <div className="flex flex-1 flex-col justify-between p-8">
+                    <div>
+                      <p className="mb-4 text-[10px] font-bold tracking-[0.4em] text-white/40 uppercase">
+                        Our approach
+                      </p>
+                      <h3 className="massive-text mb-6 text-3xl text-white">{activeValueData.label}</h3>
+                      <p className="text-sm leading-relaxed text-white/60">{activeValueData.body}</p>
+                    </div>
+                    <button
+                      className="mt-8 self-start text-[10px] font-bold tracking-[0.3em] text-white/30 uppercase hover:text-white/60 transition-colors"
+                      onClick={() => setActiveValue(null)}
+                    >
+                      Close ×
+                    </button>
+                  </div>
+                </motion.div>
               </motion.div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+            </>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </>
   )
 }
