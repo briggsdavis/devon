@@ -24,10 +24,10 @@ export const Hero = () => {
   return (
     <section className="relative flex h-screen flex-col overflow-hidden bg-black">
       {/* Background hero image with parallax */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 will-change-transform">
         <motion.div
           style={{ y: bgY }}
-          className="h-[120%] w-full bg-[url('https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center opacity-25 grayscale"
+          className="h-[120%] w-full bg-[url('https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center opacity-25 grayscale will-change-transform [backface-visibility:hidden]"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/30 to-black" />
       </div>
@@ -675,13 +675,13 @@ const CascadeImg = ({
       }}
     >
       <Link to="/portfolio" className="group block">
-        <div className="relative aspect-[3/4] overflow-hidden">
+        <div className="relative aspect-[3/4] overflow-hidden will-change-transform">
           <motion.img
             style={{ y: imgY, height: "calc(100% + 120px)", top: "-60px" }}
             src={item.src}
             alt={item.title}
             loading="lazy"
-            className="absolute w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+            className="absolute w-full object-cover transition-transform duration-700 will-change-transform [backface-visibility:hidden] group-hover:scale-[1.03]"
             referrerPolicy="no-referrer"
           />
           {/* Gradient */}
@@ -1122,14 +1122,14 @@ const FeaturedProjectCard = ({
         }`}
       >
         <div
-          className={`relative aspect-[4/3] w-full overflow-hidden ${project.widthClass}`}
+          className={`relative aspect-[4/3] w-full overflow-hidden will-change-transform ${project.widthClass}`}
         >
           <motion.img
             style={{ y: imgY, height: "calc(100% + 160px)", top: "-80px" }}
             src={project.img}
             alt={project.title}
             loading="lazy"
-            className="absolute w-full object-cover"
+            className="absolute w-full object-cover will-change-transform [backface-visibility:hidden]"
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-black/20" />
@@ -1415,13 +1415,13 @@ const ServiceCard = ({
       viewport={{ once: true, margin: "-150px" }}
       transition={{ duration: 0.7, delay: index * 0.12 }}
     >
-      <div className="relative mb-8 aspect-[3/4] overflow-hidden">
+      <div className="relative mb-8 aspect-[3/4] overflow-hidden will-change-transform">
         <motion.img
           style={{ y: imgY, height: "calc(100% + 60px)", top: "-30px" }}
           src={service.img}
           alt={service.title}
           loading="lazy"
-          className="absolute w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          className="absolute w-full object-cover transition-transform duration-700 will-change-transform [backface-visibility:hidden] group-hover:scale-105"
           referrerPolicy="no-referrer"
         />
         <div className="absolute inset-0 bg-black/30 transition-colors duration-500 group-hover:bg-black/10" />

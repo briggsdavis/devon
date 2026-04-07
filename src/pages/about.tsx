@@ -151,11 +151,11 @@ const ValueCard = ({ value }: { value: (typeof values)[0] }) => {
       onClick={() => setIsOpen((v) => !v)}
     >
       {/* Image with parallax */}
-      <div className="relative aspect-2/3 w-full overflow-hidden">
+      <div className="relative aspect-2/3 w-full overflow-hidden will-change-transform">
         <motion.img
           src={value.img}
           alt={value.label}
-          className="absolute inset-0 h-[130%] w-full object-cover"
+          className="absolute inset-0 h-[130%] w-full object-cover will-change-transform [backface-visibility:hidden]"
           style={{ y: imgY, top: "-15%" }}
         />
         {/* Tag overlay */}

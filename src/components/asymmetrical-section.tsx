@@ -51,7 +51,7 @@ export const AsymmetricalSection = ({
             Section itself has no overflow-hidden so titles are never clipped. */}
         <div
           className={cn(
-            "w-full relative aspect-[16/10] overflow-hidden",
+            "w-full relative aspect-[16/10] overflow-hidden will-change-transform",
             imageWidth,
           )}
         >
@@ -60,7 +60,7 @@ export const AsymmetricalSection = ({
             src={img}
             alt={title}
             loading="lazy"
-            className="absolute w-full object-cover"
+            className="absolute w-full object-cover will-change-transform [backface-visibility:hidden]"
             referrerPolicy="no-referrer"
           />
           <div className="absolute inset-0 bg-black/10" />

@@ -252,13 +252,13 @@ export const ProjectPage = () => {
       {/* ── Hero Banner ── */}
       <div
         ref={heroRef}
-        className="relative h-[70vh] overflow-hidden md:h-[80vh]"
+        className="relative h-[70vh] overflow-hidden will-change-transform md:h-[80vh]"
       >
         <motion.img
           style={{ y: heroImgY }}
           src={project.heroImg}
           alt={project.title}
-          className="absolute inset-0 h-[120%] w-full object-cover"
+          className="absolute inset-0 h-[120%] w-full object-cover will-change-transform [backface-visibility:hidden]"
           referrerPolicy="no-referrer"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black" />
