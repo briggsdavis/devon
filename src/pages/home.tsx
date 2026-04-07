@@ -51,14 +51,14 @@ export const Hero = () => {
 
       {/* Main stacked headline */}
       <motion.div style={{ y }} className="relative z-10">
-        <div className="border-t border-white/20 px-8 py-2 md:px-16">
+        <div className="px-8 py-2 md:px-16">
           <TextReveal
             text="SOCIAL"
             className="massive-text text-7xl leading-none md:text-10xl lg:text-12xl"
           />
         </div>
 
-        <div className="flex items-center gap-6 border-t border-white/20 px-8 py-2 md:px-16">
+        <div className="flex items-center gap-6 px-8 py-2 md:px-16">
           <span className="font-display text-sm leading-none text-white/40 md:text-2xl">
             ↓
           </span>
@@ -67,15 +67,13 @@ export const Hero = () => {
           </span>
         </div>
 
-        <div className="border-t border-white/20 px-8 py-2 md:px-16">
+        <div className="px-8 py-2 md:px-16">
           <TextReveal
             text="SATISFACTION"
             className="massive-text text-5xl leading-none md:text-9xl lg:text-11xl"
             delay={0.3}
           />
         </div>
-
-        <div className="border-t border-white/20" />
       </motion.div>
 
       {/* Bottom metadata */}
@@ -384,7 +382,7 @@ export const WordStatement = () => (
       return (
         <motion.div
           key={word}
-          className={`flex items-end border-b border-white/20 px-8 md:px-16 ${isRight ? "justify-end" : "justify-start"}`}
+          className={`flex items-end px-8 md:px-16 ${isRight ? "justify-end" : "justify-start"}`}
           initial={{ opacity: 0, x: isRight ? 40 : -40 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-150px" }}
@@ -517,29 +515,31 @@ export const WhatWeDoSection = () => {
             />
           </div>
           <div className="flex flex-1 flex-col justify-center gap-8 px-8 py-12 md:px-16">
-            <div className="space-y-3">
-              <p className="text-xs font-bold tracking-[0.35em] text-white/40 uppercase">
-                Full-Scale Creative Campaigns
-              </p>
-              <p className="max-w-lg text-lg leading-relaxed font-light text-white/70">
-                We go beyond content creation to build comprehensive, strategic
-                campaigns. As a one-stop creative partner, we handle every stage
-                from ideation and production to rollout and optimization. Our
-                process ensures your marketing is cohesive, intentional, and
-                designed for measurable impact.
-              </p>
-            </div>
-            <div className="space-y-3">
-              <p className="text-xs font-bold tracking-[0.35em] text-white/40 uppercase">
-                Results-Driven Execution
-              </p>
-              <p className="max-w-lg text-lg leading-relaxed font-light text-white/70">
-                We do not just deliver files. We create fully realized campaigns
-                built to fill seats, drive reservations, and build brand
-                loyalty. By aligning strategy with visual storytelling, we
-                eliminate the need for multiple vendors and focus on driving
-                real results for your business.
-              </p>
+            <div className="flex flex-col gap-8 md:flex-row md:gap-0">
+              <div className="space-y-3 md:flex-1 md:pr-8">
+                <p className="text-xs font-bold tracking-[0.35em] text-white/40 uppercase">
+                  Full-Scale Creative Campaigns
+                </p>
+                <p className="max-w-lg text-lg leading-relaxed font-light text-white/70">
+                  We go beyond content creation to build comprehensive, strategic
+                  campaigns. As a one-stop creative partner, we handle every stage
+                  from ideation and production to rollout and optimization. Our
+                  process ensures your marketing is cohesive, intentional, and
+                  designed for measurable impact.
+                </p>
+              </div>
+              <div className="space-y-3 md:flex-1 md:border-l md:border-white/10 md:pl-8">
+                <p className="text-xs font-bold tracking-[0.35em] text-white/40 uppercase">
+                  Results-Driven Execution
+                </p>
+                <p className="max-w-lg text-lg leading-relaxed font-light text-white/70">
+                  We do not just deliver files. We create fully realized campaigns
+                  built to fill seats, drive reservations, and build brand
+                  loyalty. By aligning strategy with visual storytelling, we
+                  eliminate the need for multiple vendors and focus on driving
+                  real results for your business.
+                </p>
+              </div>
             </div>
             <Link to="/about" className="btn-industrial-sm inline-block self-start">
               About Us →
@@ -569,7 +569,7 @@ export const CampaignStatement = () => (
       return (
         <motion.div
           key={word}
-          className={`flex items-end border-b border-white/20 px-8 md:px-16 ${isRight ? "justify-end" : "justify-start"}`}
+          className={`flex items-end px-8 md:px-16 ${isRight ? "justify-end" : "justify-start"}`}
           initial={{ opacity: 0, x: isRight ? 40 : -40 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-150px" }}
