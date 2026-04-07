@@ -469,7 +469,7 @@ export const WhatWeDoSection = () => {
     <div
       ref={wrapperRef}
       style={{ height: `calc(${pinDistance}px + 100vh)` }}
-      className="relative border-t border-white/10"
+      className="relative"
     >
       <motion.div
         style={{ y: pinY }}
@@ -480,7 +480,7 @@ export const WhatWeDoSection = () => {
           style={{ opacity: panel1Opacity }}
           className="absolute inset-0 flex flex-col md:flex-row"
         >
-          <div className="flex items-end border-b border-white/10 px-8 py-16 md:w-[42%] md:border-r md:border-b-0 md:px-16">
+          <div className="flex items-end border-b border-white/10 px-8 py-16 md:w-[42%] md:border-b-0 md:px-16">
             <TextReveal
               text="What we do"
               className="massive-text text-3xl leading-none md:text-6xl lg:text-9xl"
@@ -507,7 +507,7 @@ export const WhatWeDoSection = () => {
           style={{ opacity: panel2Opacity }}
           className="absolute inset-0 flex flex-col md:flex-row"
         >
-          <div className="flex items-end border-b border-white/10 px-8 py-16 md:w-[42%] md:border-r md:border-b-0 md:px-16">
+          <div className="flex items-end border-b border-white/10 px-8 py-16 md:w-[42%] md:border-b-0 md:px-16">
             <TextReveal
               text="Why we're different"
               className="massive-text text-3xl leading-none md:text-6xl lg:text-9xl"
