@@ -134,7 +134,7 @@ export const AboutHero = () => {
       {/* Fixed overlay — exits immediately after animation, no 100vh black hold */}
       <motion.div
         style={{ opacity: heroOpacity }}
-        className="fixed inset-0 z-50 flex h-screen w-full items-center justify-center overflow-hidden"
+        className="fixed inset-0 z-50 flex h-screen w-full items-center justify-center overflow-hidden bg-black"
       >
         <BorderMarquee opacity={bgOpacity} />
         <motion.h1
