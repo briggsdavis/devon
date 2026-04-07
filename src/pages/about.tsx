@@ -303,7 +303,7 @@ export const About = () => {
                     key={item.client}
                     className="w-[85vw] flex-shrink-0 md:w-[45vw]"
                   >
-                    <div className="border-l-2 border-white/20 pl-8">
+                    <div>
                       <span className="text-sm font-bold tracking-widest text-white/60">
                         {item.date}
                       </span>
