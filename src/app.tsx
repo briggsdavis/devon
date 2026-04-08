@@ -55,7 +55,26 @@ const AppRoutes = () => {
   return (
     <Routes location={displayedLocation ?? undefined}>
       <Route path="/" element={<Home />} />
-      <Route path="/about" element={<About />} />
+      <Route
+        path="/about"
+        element={
+          <>
+            {[...Array(7)].map((_, i) => (
+              <div
+                key={i}
+                className="column-line"
+                style={
+                  {
+                    left: `${(100 / 6) * i}%`,
+                    ["--sweep-delay" as string]: `${i * 0.75}s`,
+                  } as React.CSSProperties
+                }
+              />
+            ))}
+            <About />
+          </>
+        }
+      />
       <Route path="/services" element={<Services />} />
       <Route path="/portfolio" element={<Portfolio />} />
       <Route path="/portfolio/:category" element={<CategoryPage />} />

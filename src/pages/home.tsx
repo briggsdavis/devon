@@ -51,14 +51,14 @@ export const Hero = () => {
 
       {/* Main stacked headline */}
       <motion.div style={{ y }} className="relative z-10">
-        <div className="border-t border-white/20 px-8 py-2 md:px-16">
+        <div className="px-8 py-2 md:px-16">
           <TextReveal
             text="SOCIAL"
             className="massive-text text-7xl leading-none md:text-10xl lg:text-12xl"
           />
         </div>
 
-        <div className="flex items-center gap-6 border-t border-white/20 px-8 py-2 md:px-16">
+        <div className="flex items-center gap-6 px-8 py-2 md:px-16">
           <span className="font-display text-sm leading-none text-white/40 md:text-2xl">
             ↓
           </span>
@@ -67,15 +67,13 @@ export const Hero = () => {
           </span>
         </div>
 
-        <div className="border-t border-white/20 px-8 py-2 md:px-16">
+        <div className="px-8 py-2 md:px-16">
           <TextReveal
             text="SATISFACTION"
             className="massive-text text-5xl leading-none md:text-9xl lg:text-11xl"
             delay={0.3}
           />
         </div>
-
-        <div className="border-t border-white/20" />
       </motion.div>
 
       {/* Bottom metadata */}
@@ -300,7 +298,7 @@ export const BrandsCarousel = () => {
   })
 
   return (
-    <section className="border-t border-white/10 bg-black pb-20 md:pb-28">
+    <section className="bg-black pb-20 md:pb-28">
       {/* Header */}
       <div className="border-b border-white/10 px-8 py-10 md:px-16">
         <p className="mb-4 text-xs font-bold tracking-[0.4em] text-white/30 uppercase">
@@ -314,7 +312,7 @@ export const BrandsCarousel = () => {
       </div>
 
       {/* Scrolling track */}
-      <div className="h-40 overflow-hidden border-b border-white/10">
+      <div className="h-40 overflow-hidden">
         <motion.div style={{ x: baseX }} className="flex h-full w-max">
           {/* First copy — measured for wrap */}
           <div ref={trackRef} className="flex h-full">
@@ -384,7 +382,7 @@ export const WordStatement = () => (
       return (
         <motion.div
           key={word}
-          className={`flex items-end border-b border-white/20 px-8 md:px-16 ${isRight ? "justify-end" : "justify-start"}`}
+          className={`flex items-end px-8 md:px-16 ${isRight ? "justify-end" : "justify-start"}`}
           initial={{ opacity: 0, x: isRight ? 40 : -40 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-150px" }}
@@ -471,7 +469,7 @@ export const WhatWeDoSection = () => {
     <div
       ref={wrapperRef}
       style={{ height: `calc(${pinDistance}px + 100vh)` }}
-      className="relative border-t border-white/10"
+      className="relative"
     >
       <motion.div
         style={{ y: pinY }}
@@ -482,7 +480,7 @@ export const WhatWeDoSection = () => {
           style={{ opacity: panel1Opacity }}
           className="absolute inset-0 flex flex-col md:flex-row"
         >
-          <div className="flex items-end border-b border-white/10 px-8 py-16 md:w-[42%] md:border-r md:border-b-0 md:px-16">
+          <div className="flex items-end border-b border-white/10 px-8 py-16 md:w-[42%] md:border-b-0 md:px-16">
             <TextReveal
               text="What we do"
               className="massive-text text-3xl leading-none md:text-6xl lg:text-9xl"
@@ -509,7 +507,7 @@ export const WhatWeDoSection = () => {
           style={{ opacity: panel2Opacity }}
           className="absolute inset-0 flex flex-col md:flex-row"
         >
-          <div className="flex items-end border-b border-white/10 px-8 py-16 md:w-[42%] md:border-r md:border-b-0 md:px-16">
+          <div className="flex items-end border-b border-white/10 px-8 py-16 md:w-[42%] md:border-b-0 md:px-16">
             <TextReveal
               text="Why we're different"
               className="massive-text text-3xl leading-none md:text-6xl lg:text-9xl"
@@ -517,29 +515,31 @@ export const WhatWeDoSection = () => {
             />
           </div>
           <div className="flex flex-1 flex-col justify-center gap-8 px-8 py-12 md:px-16">
-            <div className="space-y-3">
-              <p className="text-xs font-bold tracking-[0.35em] text-white/40 uppercase">
-                Full-Scale Creative Campaigns
-              </p>
-              <p className="max-w-lg text-lg leading-relaxed font-light text-white/70">
-                We go beyond content creation to build comprehensive, strategic
-                campaigns. As a one-stop creative partner, we handle every stage
-                from ideation and production to rollout and optimization. Our
-                process ensures your marketing is cohesive, intentional, and
-                designed for measurable impact.
-              </p>
-            </div>
-            <div className="space-y-3">
-              <p className="text-xs font-bold tracking-[0.35em] text-white/40 uppercase">
-                Results-Driven Execution
-              </p>
-              <p className="max-w-lg text-lg leading-relaxed font-light text-white/70">
-                We do not just deliver files. We create fully realized campaigns
-                built to fill seats, drive reservations, and build brand
-                loyalty. By aligning strategy with visual storytelling, we
-                eliminate the need for multiple vendors and focus on driving
-                real results for your business.
-              </p>
+            <div className="flex flex-col gap-8 md:flex-row md:gap-0">
+              <div className="space-y-3 md:flex-1 md:pr-8">
+                <p className="text-xs font-bold tracking-[0.35em] text-white/40 uppercase">
+                  Full-Scale Creative Campaigns
+                </p>
+                <p className="max-w-lg text-lg leading-relaxed font-light text-white/70">
+                  We go beyond content creation to build comprehensive, strategic
+                  campaigns. As a one-stop creative partner, we handle every stage
+                  from ideation and production to rollout and optimization. Our
+                  process ensures your marketing is cohesive, intentional, and
+                  designed for measurable impact.
+                </p>
+              </div>
+              <div className="space-y-3 md:flex-1 md:border-l md:border-white/10 md:pl-8">
+                <p className="text-xs font-bold tracking-[0.35em] text-white/40 uppercase">
+                  Results-Driven Execution
+                </p>
+                <p className="max-w-lg text-lg leading-relaxed font-light text-white/70">
+                  We do not just deliver files. We create fully realized campaigns
+                  built to fill seats, drive reservations, and build brand
+                  loyalty. By aligning strategy with visual storytelling, we
+                  eliminate the need for multiple vendors and focus on driving
+                  real results for your business.
+                </p>
+              </div>
             </div>
             <Link to="/about" className="btn-industrial-sm inline-block self-start">
               About Us →
@@ -569,7 +569,7 @@ export const CampaignStatement = () => (
       return (
         <motion.div
           key={word}
-          className={`flex items-end border-b border-white/20 px-8 md:px-16 ${isRight ? "justify-end" : "justify-start"}`}
+          className={`flex items-end px-8 md:px-16 ${isRight ? "justify-end" : "justify-start"}`}
           initial={{ opacity: 0, x: isRight ? 40 : -40 }}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true, margin: "-150px" }}
@@ -705,7 +705,7 @@ const CascadeImg = ({
 }
 
 export const FeaturedCascade = () => (
-  <section className="border-t border-white/10 bg-black pt-12 pb-64">
+  <section className="bg-black pt-12 pb-64">
     {/* Header — px-8 matches nav padding so View All right-edge aligns with Contact */}
     <div className="mb-20 flex items-end justify-between px-8 md:px-16">
       <div>
@@ -1459,7 +1459,7 @@ export const ServiceTrinity = () => {
 
 // ─── FAQ CTA ─────────────────────────────────────────────────────────────────
 export const FaqCta = () => (
-  <section className="grid grid-cols-1 border-t border-white/10 lg:grid-cols-[1fr_2fr]">
+  <section className="grid grid-cols-1 lg:grid-cols-[1fr_2fr]">
     {/* Left */}
     <div className="border-b border-white/10 px-8 py-16 lg:border-r lg:border-b-0 lg:px-12 lg:py-20">
       <span className="mb-4 block text-xs font-bold tracking-[0.4em] text-white/30 uppercase">
