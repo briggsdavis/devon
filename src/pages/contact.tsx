@@ -452,7 +452,10 @@ export const Contact = () => {
       </section>
 
       {/* ── FAQ ──────────────────────────────────────────────────────────── */}
-      <section id="faq" className="grid grid-cols-1 border-b border-white/10 lg:grid-cols-[1fr_2fr]">
+      <section
+        id="faq"
+        className="grid grid-cols-1 border-b border-white/10 lg:grid-cols-[1fr_2fr]"
+      >
         {/* FAQ title sidebar */}
         <BlurIn
           delay={0.1}

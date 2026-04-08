@@ -496,7 +496,10 @@ export const WhatWeDoSection = () => {
               striking visuals. By blending nostalgia with innovation, we create
               identities that feel both familiar and fresh for modern audiences.
             </p>
-            <Link to="/about" className="btn-industrial-sm inline-block self-start">
+            <Link
+              to="/about"
+              className="btn-industrial-sm inline-block self-start"
+            >
               About Us →
             </Link>
           </div>
@@ -521,11 +524,11 @@ export const WhatWeDoSection = () => {
                   Full-Scale Creative Campaigns
                 </p>
                 <p className="max-w-lg text-lg leading-relaxed font-light text-white/70">
-                  We go beyond content creation to build comprehensive, strategic
-                  campaigns. As a one-stop creative partner, we handle every stage
-                  from ideation and production to rollout and optimization. Our
-                  process ensures your marketing is cohesive, intentional, and
-                  designed for measurable impact.
+                  We go beyond content creation to build comprehensive,
+                  strategic campaigns. As a one-stop creative partner, we handle
+                  every stage from ideation and production to rollout and
+                  optimization. Our process ensures your marketing is cohesive,
+                  intentional, and designed for measurable impact.
                 </p>
               </div>
               <div className="space-y-3 md:flex-1 md:border-l md:border-white/10 md:pl-8">
@@ -533,15 +536,18 @@ export const WhatWeDoSection = () => {
                   Results-Driven Execution
                 </p>
                 <p className="max-w-lg text-lg leading-relaxed font-light text-white/70">
-                  We do not just deliver files. We create fully realized campaigns
-                  built to fill seats, drive reservations, and build brand
-                  loyalty. By aligning strategy with visual storytelling, we
-                  eliminate the need for multiple vendors and focus on driving
-                  real results for your business.
+                  We do not just deliver files. We create fully realized
+                  campaigns built to fill seats, drive reservations, and build
+                  brand loyalty. By aligning strategy with visual storytelling,
+                  we eliminate the need for multiple vendors and focus on
+                  driving real results for your business.
                 </p>
               </div>
             </div>
-            <Link to="/about" className="btn-industrial-sm inline-block self-start">
+            <Link
+              to="/about"
+              className="btn-industrial-sm inline-block self-start"
+            >
               About Us →
             </Link>
           </div>

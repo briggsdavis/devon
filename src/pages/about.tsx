@@ -198,7 +198,11 @@ export const About = () => {
 
   // Fade content in as the WHO WE ARE overlay exits (matches AboutHero's scrollDistance = 50vh)
   const heroEnd = typeof window !== "undefined" ? window.innerHeight * 0.5 : 0
-  const contentOpacity = useTransform(activeY, [heroEnd - 10, heroEnd + 10], [0, 1])
+  const contentOpacity = useTransform(
+    activeY,
+    [heroEnd - 10, heroEnd + 10],
+    [0, 1],
+  )
 
   const wrapperTopRef = useRef(0)
   const scrollDistanceRef = useRef(0)
@@ -293,7 +297,7 @@ export const About = () => {
               </h3>
             </div>
             {/* Scrolling cards */}
-            <div className="ml-8 md:ml-16 flex flex-1 items-start pt-6 overflow-hidden">
+            <div className="ml-8 flex flex-1 items-start overflow-hidden pt-6 md:ml-16">
               <motion.div
                 ref={horizontalRef}
                 style={{ x }}

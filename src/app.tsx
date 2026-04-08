@@ -78,10 +78,7 @@ const AppRoutes = () => {
       <Route path="/services" element={<Services />} />
       <Route path="/portfolio" element={<Portfolio />} />
       <Route path="/portfolio/:category" element={<CategoryPage />} />
-      <Route
-        path="/portfolio/:category/:project"
-        element={<ProjectPage />}
-      />
+      <Route path="/portfolio/:category/:project" element={<ProjectPage />} />
       <Route path="/contact" element={<Contact />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

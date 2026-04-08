@@ -85,7 +85,6 @@ const CategoryCard = ({
           </span>
         </div>
       </div>
-
     </Link>
   )
 }

@@ -222,7 +222,7 @@ const ServiceCell = ({
       {/* Plus — absolutely centered in the card */}
       <button
         onClick={() => setIsOpen((v) => !v)}
-        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex w-fit items-center justify-center py-2 text-5xl leading-none font-thin transition-opacity hover:opacity-60 ${
+        className={`absolute top-1/2 left-1/2 flex w-fit -translate-x-1/2 -translate-y-1/2 items-center justify-center py-2 text-5xl leading-none font-thin transition-opacity hover:opacity-60 ${
           service.inverted ? "text-black/40" : "text-white/40"
         }`}
         aria-label={isOpen ? `Close ${service.name}` : `Expand ${service.name}`}

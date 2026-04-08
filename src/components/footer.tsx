@@ -93,7 +93,7 @@ export const Footer = () => {
       </div>
 
       {/* Large background text */}
-      <div className="massive-text pointer-events-none absolute bottom-0 left-8 right-8 overflow-hidden whitespace-nowrap text-[13vw] leading-none font-black text-white/5 select-none md:left-16 md:right-16">
+      <div className="massive-text pointer-events-none absolute right-8 bottom-0 left-8 overflow-hidden text-[13vw] leading-none font-black whitespace-nowrap text-white/5 select-none md:right-16 md:left-16">
         SATISFACTION
       </div>
     </footer>
