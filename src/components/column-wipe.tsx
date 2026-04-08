@@ -5,8 +5,8 @@ import { useLocation } from "react-router"
 import type { Location } from "react-router"
 
 const COLUMNS = 6
-const DURATION = 0.52
-const STAGGER = 0.07
+const DURATION = 0.39
+const STAGGER = 0.0525
 
 // Exposes the "displayed" location so <Routes> can render the old page during wipe-in
 const ColumnWipeContext = createContext<Location | null>(null)
