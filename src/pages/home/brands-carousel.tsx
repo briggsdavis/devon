@@ -105,9 +105,7 @@ export const BrandsCarousel = () => {
           Collaborations
         </p>
         <h2 className="text-2xl leading-[1.25] font-light md:text-3xl">
-          Brands &amp; creative teams
-          <br />
-          we&apos;ve worked with:
+          Brands &amp; creative teams we&apos;ve worked with:
         </h2>
       </div>
 

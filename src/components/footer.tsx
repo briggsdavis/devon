@@ -68,7 +68,6 @@ export const Footer = () => {
           <p className="text-sm font-light tracking-wide text-white/70">
             info@socialsatisfaction.com
           </p>
-          <p className="text-sm text-white/40">Marketing Agency</p>
           <Link to="/contact" className="btn-industrial-sm mt-4 inline-block">
             Start a Project
           </Link>
