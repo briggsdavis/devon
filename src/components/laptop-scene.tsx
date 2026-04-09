@@ -1,7 +1,7 @@
 import { Environment, useGLTF } from "@react-three/drei"
 import { Canvas, useFrame } from "@react-three/fiber"
 import { MotionValue } from "motion/react"
-import { Suspense, useEffect, useMemo, useRef } from "react"
+import { Suspense, useMemo, useRef } from "react"
 import * as THREE from "three"
 
 // ─── Loaded Laptop Model ────────────────────────────────────────────────────
@@ -10,16 +10,17 @@ function Laptop({ scrollProgress }: { scrollProgress: MotionValue<number> }) {
   const { scene: originalScene } = useGLTF("/macbook.glb")
   const scene = useMemo(() => originalScene.clone(true), [originalScene])
 
-  // Center and normalize the model on first load
-  useEffect(() => {
+  // Derive normalization transform from the original geometry (immutable)
+  const { scale, offset } = useMemo(() => {
     const box = new THREE.Box3().setFromObject(scene)
     const center = box.getCenter(new THREE.Vector3())
     const size = box.getSize(new THREE.Vector3())
     const maxDim = Math.max(size.x, size.y, size.z)
-    // Normalize to ~2 units wide
-    const scale = 2 / maxDim
-    scene.scale.setScalar(scale)
-    scene.position.set(-center.x * scale, -center.y * scale, -center.z * scale)
+    const s = 2 / maxDim
+    return {
+      scale: s,
+      offset: new THREE.Vector3(-center.x * s, -center.y * s, -center.z * s),
+    }
   }, [scene])
 
   // Animate laptop position and rotation based on scroll
@@ -27,10 +28,10 @@ function Laptop({ scrollProgress }: { scrollProgress: MotionValue<number> }) {
     if (!groupRef.current) return
     const t = scrollProgress.get()
 
-    // Start very far away, come close to fill the screen
-    groupRef.current.position.z = THREE.MathUtils.lerp(-250, -40, t)
+    // Start far away, come close to fill the screen
+    groupRef.current.position.z = THREE.MathUtils.lerp(-15, 2.5, t)
     // Lower the laptop so the screen ends up at eye level when close
-    groupRef.current.position.y = THREE.MathUtils.lerp(0, -6.5, t)
+    groupRef.current.position.y = THREE.MathUtils.lerp(0, 0.1, t)
     // Slight tilt throughout
     groupRef.current.rotation.x = THREE.MathUtils.lerp(0.25, 0.1, t)
     // Slight Y rotation at start for visual interest
@@ -39,7 +40,9 @@ function Laptop({ scrollProgress }: { scrollProgress: MotionValue<number> }) {
 
   return (
     <group ref={groupRef}>
-      <primitive object={scene} />
+      <group scale={scale} position={offset}>
+        <primitive object={scene} />
+      </group>
     </group>
   )
 }
@@ -51,7 +54,7 @@ useGLTF.preload("/macbook.glb")
 function Scene({ scrollProgress }: { scrollProgress: MotionValue<number> }) {
   return (
     <>
-      <fog attach="fog" args={["#000000", 100, 300]} />
+      <fog attach="fog" args={["#000000", 10, 25]} />
 
       {/* Lighting */}
       <ambientLight intensity={0.3} />
