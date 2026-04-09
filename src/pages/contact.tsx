@@ -16,16 +16,8 @@ const FAQ_SECTIONS = [
         a: "We scope output based on your goals, but typically you're receiving high-volume, platform-ready content - short-form videos, photos, and campaign assets designed to last the entire month (and beyond).",
       },
       {
-        q: "How often are you shooting?",
-        a: "Most clients are on a monthly content capture schedule, but we adjust based on your needs - launches, seasonal pushes, or high-volume months.",
-      },
-      {
         q: "Do we own the content?",
         a: "Yes - you have full usage rights across your marketing channels: social, ads, website, email, etc.",
-      },
-      {
-        q: "Can we use the content for ads and website?",
-        a: "Absolutely. We create content with multi-use in mind, so it performs across all platforms - not just Instagram.",
       },
     ],
   },
@@ -41,14 +33,6 @@ const FAQ_SECTIONS = [
         a: "You can - but one-off shoots create content. Retainers build momentum, consistency, and campaigns that actually drive results over time.",
       },
       {
-        q: "What's the ROI on this?",
-        a: "More engagement, stronger brand perception, and ultimately more customers. We focus on content that drives action - reservations, orders, and repeat visits - not just likes.",
-      },
-      {
-        q: "Is this cheaper than hiring in-house?",
-        a: "In most cases, yes. You're getting an entire team - creative direction, shooters, editors, strategists - without the overhead of hiring internally.",
-      },
-      {
         q: "Can we scale up or down?",
         a: "Yes. We can adjust production volume and campaign intensity depending on your season, goals, or budget.",
       },
@@ -62,20 +46,8 @@ const FAQ_SECTIONS = [
         a: "We don't just make content - we build campaigns designed to drive behavior. That means aligning visuals, messaging, and timing around real business goals like reservations, events, and menu pushes.",
       },
       {
-        q: "Do you help with strategy or just content?",
-        a: "Strategy is the foundation. Content is just the execution.",
-      },
-      {
-        q: "What platforms should we focus on?",
-        a: "Typically Instagram and TikTok are core, but we tailor platform focus based on your audience and goals.",
-      },
-      {
         q: "How do we know what's working?",
         a: "We track performance monthly - what's driving engagement, clicks, and conversions - and adjust strategy accordingly.",
-      },
-      {
-        q: "Do you track performance?",
-        a: "Yes - monthly reporting and ongoing optimization are part of the process.",
       },
     ],
   },
@@ -87,20 +59,12 @@ const FAQ_SECTIONS = [
         a: "We come in with a full plan - shot lists, concepts, and direction - so everything is efficient, organized, and intentional.",
       },
       {
-        q: "How much time do you need on-site?",
-        a: "Typically a few hours depending on scope, but we maximize every shoot to capture a full month of content.",
-      },
-      {
         q: "Do we need to prepare anything?",
         a: "We'll guide you on exactly what's needed - menu items, staff availability, setup - but we handle the heavy lifting.",
       },
       {
         q: "Will you direct staff or talent?",
         a: "Yes. We fully direct talent, staff, and scenes so everything feels natural but elevated.",
-      },
-      {
-        q: "Can you handle models, props, etc.?",
-        a: "Yes - we can source and coordinate everything needed for the shoot.",
       },
     ],
   },
@@ -119,10 +83,6 @@ const FAQ_SECTIONS = [
         q: "Do you respond to comments/DMs?",
         a: "We offer community management as part of full-service social.",
       },
-      {
-        q: "Do you plan the content calendar?",
-        a: "Yes - everything is mapped out monthly so nothing is random or reactive.",
-      },
     ],
   },
   {
@@ -135,14 +95,6 @@ const FAQ_SECTIONS = [
       {
         q: "How do you approach launches or events?",
         a: "We create full rollout strategies - teasers, launch content, paid support, and post-event recaps - so you get maximum visibility and impact.",
-      },
-      {
-        q: "Can you help promote a new menu or opening?",
-        a: "That's exactly what we specialize in - turning moments like that into full-scale campaigns.",
-      },
-      {
-        q: "How far in advance do you plan?",
-        a: "We typically plan monthly, but for major campaigns we map things out weeks (or months) in advance.",
       },
     ],
   },
@@ -161,10 +113,6 @@ const FAQ_SECTIONS = [
         q: "Can you match our brand?",
         a: "We don't just match it - we elevate it while keeping it authentic.",
       },
-      {
-        q: "Do you help with branding too?",
-        a: "Yes - branding, visuals, and voice all tie into how we build your content and campaigns.",
-      },
     ],
   },
   {
@@ -175,16 +123,8 @@ const FAQ_SECTIONS = [
         a: "Turnaround is typically within 1-2 weeks depending on scope.",
       },
       {
-        q: "How do we get the files?",
-        a: "Delivered in organized, ready-to-use folders optimized for each platform.",
-      },
-      {
         q: "Can we request revisions?",
         a: "Yes - we include revision rounds to make sure everything aligns.",
-      },
-      {
-        q: "How far in advance do we need to book?",
-        a: "We recommend booking at least a few weeks ahead to properly plan and execute.",
       },
     ],
   },
@@ -198,10 +138,6 @@ const FAQ_SECTIONS = [
       {
         q: "Is this going to be a headache?",
         a: "No - we're built to take this off your plate. We handle planning, production, and execution so your team can stay focused on operations.",
-      },
-      {
-        q: "Are you just going to show up and wing it?",
-        a: "Never. Everything is planned, intentional, and tied to a larger campaign strategy.",
       },
       {
         q: "Do you actually understand restaurants?",
