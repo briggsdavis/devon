@@ -15,7 +15,6 @@ import { CategoryPage } from "./pages/category"
 import { Contact } from "./pages/contact"
 import { BrandsCarousel } from "./pages/home/brands-carousel"
 import { CampaignStatement } from "./pages/home/campaign-statement"
-import { CircleStatement } from "./pages/home/circle-statement"
 import { FaqCta } from "./pages/home/faq-cta"
 import { FeaturedCascade } from "./pages/home/featured-cascade"
 import { HeroCanvas, Hero } from "./pages/home/hero"
@@ -47,7 +46,6 @@ const Home = () => (
     <WhatWeDoSection />
     <CampaignStatement />
     <FeaturedCascade />
-    <CircleStatement />
     <FaqCta />
   </>
 )

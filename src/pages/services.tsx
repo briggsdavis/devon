@@ -16,7 +16,7 @@ const SERVICES = [
       "Location scouting + talent coordination",
     ],
     inverted: false,
-    minH: "min-h-[360px]",
+    minH: "min-h-[414px]",
   },
   {
     name: "Photography",
@@ -30,7 +30,7 @@ const SERVICES = [
       "Product photography (retail items, merch, packaged goods)",
     ],
     inverted: true,
-    minH: "min-h-[432px]",
+    minH: "min-h-[497px]",
   },
   {
     name: "Branding",
@@ -44,7 +44,7 @@ const SERVICES = [
       "Brand guidelines / brand book",
     ],
     inverted: true,
-    minH: "min-h-[312px]",
+    minH: "min-h-[359px]",
   },
   {
     name: "Visual Identity",
@@ -58,7 +58,7 @@ const SERVICES = [
       "Brand asset library",
     ],
     inverted: false,
-    minH: "min-h-[384px]",
+    minH: "min-h-[442px]",
   },
   {
     name: "Social Media",
@@ -72,7 +72,7 @@ const SERVICES = [
       "Community management (comments + DMs)",
     ],
     inverted: false,
-    minH: "min-h-[312px]",
+    minH: "min-h-[359px]",
   },
   {
     name: "Email Marketing",
@@ -86,7 +86,7 @@ const SERVICES = [
       "Performance reporting (open rates, CTR)",
     ],
     inverted: true,
-    minH: "min-h-[408px]",
+    minH: "min-h-[469px]",
   },
   {
     name: "Graphic Design",
@@ -100,7 +100,7 @@ const SERVICES = [
       "Monthly graphic drops + highlight covers",
     ],
     inverted: true,
-    minH: "min-h-[336px]",
+    minH: "min-h-[386px]",
   },
   {
     name: "Motion Graphics",
@@ -114,7 +114,7 @@ const SERVICES = [
       "Lower thirds + title sequences",
     ],
     inverted: false,
-    minH: "min-h-[456px]",
+    minH: "min-h-[524px]",
   },
 ]
 

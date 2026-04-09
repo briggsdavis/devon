@@ -41,19 +41,23 @@ const CascadeImg = ({
   const vertOffsets = [0, 80, 160] // px — cascades downward
 
   return (
-    <motion.div
+    // Stable non-animated wrapper — useScroll target must not be transformed
+    // to avoid parallax measurement glitches during the entrance animation
+    <div
       ref={ref}
       className="relative min-w-0 flex-1"
       style={{ marginTop: vertOffsets[index] }}
-      initial={{ opacity: 0, y: 80 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-150px" }}
-      transition={{
-        duration: 0.9,
-        delay: index * 0.15,
-        ease: [0.22, 1, 0.36, 1],
-      }}
     >
+      <motion.div
+        initial={{ opacity: 0, y: 80 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-150px" }}
+        transition={{
+          duration: 0.9,
+          delay: index * 0.15,
+          ease: [0.22, 1, 0.36, 1],
+        }}
+      >
       <Link to="/portfolio" className="group block">
         <div className="relative aspect-[3/4] overflow-hidden">
           <motion.img
@@ -98,7 +102,8 @@ const CascadeImg = ({
           </div>
         </div>
       </Link>
-    </motion.div>
+      </motion.div>
+    </div>
   )
 }
 
