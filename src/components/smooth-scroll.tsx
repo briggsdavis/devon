@@ -17,6 +17,13 @@ export const SmoothScrollProvider = ({
 }: {
   children: React.ReactNode
 }) => {
+  // Ensure the native scroll position starts at 0 so the spring is never
+  // seeded with a stale restored value (belt-and-suspenders alongside the
+  // history.scrollRestoration = "manual" set in main.tsx).
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
+
   const { scrollY } = useScroll()
   const smoothY = useSpring(scrollY, {
     damping: 38,
