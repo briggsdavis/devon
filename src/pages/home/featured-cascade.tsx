@@ -157,7 +157,7 @@ export const FeaturedCascade = () => (
 
     {/* Cascade */}
     <div className="px-8 md:px-16">
-      <div className="flex items-start gap-5 md:gap-8">
+      <div className="relative z-[2] flex items-start gap-5 md:gap-8">
         {CASCADE_ITEMS.map((item, i) => (
           <CascadeImg key={i} item={item} index={i} />
         ))}

@@ -260,7 +260,7 @@ export const Services = () => (
     </section>
 
     {/* Asymmetric bento grid — 3 flex columns so cards stack flush */}
-    <div className="flex flex-col divide-y divide-white/40 md:flex-row md:divide-x md:divide-y-0">
+    <div className="relative z-[2] flex flex-col divide-y divide-white/40 md:flex-row md:divide-x md:divide-y-0">
       {[0, 1, 2].map((col) => {
         const colServices = SERVICES.filter((_, i) => i % 3 === col)
         return (

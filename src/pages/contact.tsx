@@ -274,7 +274,7 @@ export const Contact = () => {
     <div className="pt-32">
       {/* ── Big centered header ───────────────────────────────────────────── */}
       <motion.section
-        className="border-b border-white/10 px-8 pb-16 text-center md:px-16"
+        className="border-b border-white/10 px-8 pb-16 md:px-16"
         initial={{ opacity: 0, filter: "blur(20px)" }}
         animate={{ opacity: 1, filter: "blur(0px)" }}
         transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
@@ -291,7 +291,7 @@ export const Contact = () => {
         {/* Contact details sidebar */}
         <BlurIn
           delay={0.1}
-          className="border-b border-white/10 px-8 py-12 lg:border-r lg:border-b-0 lg:px-12 lg:py-16"
+          className="border-b border-white/10 px-8 py-12 md:px-16 lg:border-r lg:border-b-0 lg:py-16"
         >
           <p className="mb-10 text-xs font-bold tracking-[0.4em] text-white/30 uppercase">
             Get In Touch
@@ -343,7 +343,7 @@ export const Contact = () => {
         </BlurIn>
 
         {/* Form */}
-        <div className="px-8 py-12 lg:px-12 lg:py-16">
+        <div className="px-8 py-12 md:px-16 lg:py-16">
           <form
             onSubmit={(e) => e.preventDefault()}
             className="border-t border-white/10"
@@ -395,7 +395,7 @@ export const Contact = () => {
         {/* FAQ title sidebar */}
         <BlurIn
           delay={0.1}
-          className="border-b border-white/10 px-8 py-12 lg:border-r lg:border-b-0 lg:px-12 lg:py-16"
+          className="border-b border-white/10 px-8 py-12 md:px-16 lg:border-r lg:border-b-0 lg:py-16"
         >
           <span className="mb-4 block text-xs font-bold tracking-[0.4em] text-white/30 uppercase">
             Frequently Asked
@@ -407,7 +407,7 @@ export const Contact = () => {
         </BlurIn>
 
         {/* FAQ questions */}
-        <div className="px-8 py-12 lg:px-12 lg:py-16">
+        <div className="px-8 py-12 md:px-16 lg:py-16">
           <div className="space-y-14">
             {FAQ_SECTIONS.map((section) => (
               <BlurIn key={section.section}>

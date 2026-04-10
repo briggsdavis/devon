@@ -328,7 +328,7 @@ export const About = () => {
         </div>
 
         {/* Values Images — three staggered portrait images, click to expand text */}
-        <div className="px-8 pt-[54px] pb-6 md:px-16 md:pt-[82px] md:pb-8">
+        <div className="relative z-[2] px-8 pt-[54px] pb-6 md:px-16 md:pt-[82px] md:pb-8">
           <div className="flex items-start gap-3 md:gap-5">
             {values.map((value) => (
               <ValueCard key={value.label} value={value} />

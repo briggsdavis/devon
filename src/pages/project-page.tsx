@@ -42,9 +42,9 @@ export const ProjectPage = () => {
   ]
 
   return (
-    <div className="pt-32">
+    <div className="pt-24">
       {/* Header */}
-      <section className="border-b border-white/10 px-8 pb-16 md:px-16">
+      <section className="border-b border-white/10 px-8 pb-11 md:px-16">
         <Link
           to={`/portfolio/${category.slug}`}
           className="mb-6 block text-xs font-bold tracking-[0.4em] text-white/30 uppercase transition-colors hover:text-white"

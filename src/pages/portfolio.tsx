@@ -92,9 +92,9 @@ const CategoryCard = ({
 // ─── Portfolio page ───────────────────────────────────────────────────────────
 // Layout: full → split → full → split → full → split  (9 categories total)
 export const Portfolio = () => (
-  <div className="pt-32">
+  <div className="pt-24">
     {/* Page header */}
-    <section className="border-b border-white/10 px-8 pb-16 md:px-16">
+    <section className="border-b border-white/10 px-8 pb-11 md:px-16">
       <span className="mb-6 block text-xs font-bold tracking-[0.4em] text-white/30 uppercase">
         Selected Work
       </span>
