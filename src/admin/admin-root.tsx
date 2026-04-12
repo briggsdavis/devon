@@ -1,7 +1,6 @@
 import { useEffect } from "react"
 import { Route, Routes } from "react-router"
 import { AdminLayout } from "./admin-layout"
-import { AdminContentProvider } from "./context/content-context"
 import { AboutBodyAdmin } from "./pages/about/body"
 import { AboutIndex } from "./pages/about/index"
 import { TimelineAdmin } from "./pages/about/timeline"
@@ -20,6 +19,7 @@ import { WhatWeDoAdmin } from "./pages/homepage/what-we-do"
 import { CategoryAdmin } from "./pages/portfolio/category"
 import { PortfolioIndex } from "./pages/portfolio/index"
 import { ProjectAdmin } from "./pages/portfolio/project"
+import { BrandAdmin } from "./pages/brand"
 import { SeoAdmin } from "./pages/seo"
 import { ServicesAdmin } from "./pages/services"
 
@@ -34,6 +34,7 @@ const AdminApp = () => {
     <Routes>
       <Route element={<AdminLayout />}>
         <Route index element={<Dashboard />} />
+        <Route path="brand" element={<BrandAdmin />} />
         <Route path="homepage" element={<HomepageIndex />} />
         <Route path="homepage/hero" element={<HeroAdmin />} />
         <Route path="homepage/brands" element={<BrandsAdmin />} />
@@ -58,8 +59,4 @@ const AdminApp = () => {
   )
 }
 
-export const AdminRoot = () => (
-  <AdminContentProvider>
-    <AdminApp />
-  </AdminContentProvider>
-)
+export const AdminRoot = () => <AdminApp />

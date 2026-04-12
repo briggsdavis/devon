@@ -6,12 +6,14 @@ import {
   Info,
   LayoutGrid,
   Mail,
+  Palette,
   Settings,
 } from "lucide-react"
 import { NavLink } from "react-router"
 
 const links = [
   { to: "/admin", label: "Dashboard", icon: Home, end: true },
+  { to: "/admin/brand", label: "Brand", icon: Palette },
   { to: "/admin/homepage", label: "Homepage", icon: LayoutGrid },
   { to: "/admin/about", label: "About", icon: Info },
   { to: "/admin/services", label: "Services", icon: Settings },
