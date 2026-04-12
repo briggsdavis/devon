@@ -1,8 +1,11 @@
 import { ExternalLink, Save } from "lucide-react"
 import { useState } from "react"
 import { Link } from "react-router"
+import { useContent } from "./context/content-context"
 
 export const AdminTopbar = () => {
+  const { content } = useContent()
+  const logoSrc = content.logo || "/satisfactionlogo.png"
   const [savedFeedback, setSavedFeedback] = useState(false)
 
   const handleSave = () => {
@@ -13,7 +16,7 @@ export const AdminTopbar = () => {
   return (
     <header className="flex h-14 shrink-0 items-center justify-between border-b border-white/10 bg-black px-6">
       <div className="flex items-center gap-4">
-        <img src="/satisfactionlogo.png" alt="Social Satisfaction" className="h-7 w-auto" />
+        <img src={logoSrc} alt="Social Satisfaction" className="h-7 w-auto" />
         <span className="border-l border-white/10 pl-4 text-xs font-bold tracking-[0.3em] text-white/30 uppercase">
           Content Manager
         </span>

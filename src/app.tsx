@@ -6,6 +6,7 @@ import {
   useLocation,
 } from "react-router"
 import { AdminRoot } from "./admin/admin-root"
+import { AdminContentProvider } from "./admin/context/content-context"
 import { ColumnWipe, useColumnWipeLocation } from "./components/column-wipe"
 import { CustomCursor } from "./components/custom-cursor"
 import { Footer } from "./components/footer"
@@ -130,11 +131,13 @@ const SiteRoot = () => (
 
 export default function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/admin/*" element={<AdminRoot />} />
-        <Route path="/*" element={<SiteRoot />} />
-      </Routes>
-    </Router>
+    <AdminContentProvider>
+      <Router>
+        <Routes>
+          <Route path="/admin/*" element={<AdminRoot />} />
+          <Route path="/*" element={<SiteRoot />} />
+        </Routes>
+      </Router>
+    </AdminContentProvider>
   )
 }

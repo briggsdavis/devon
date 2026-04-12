@@ -1,4 +1,5 @@
 import { Link } from "react-router"
+import { useContent } from "../admin/context/content-context"
 
 const SOCIAL_LINKS = [
   { label: "Instagram", href: "https://www.instagram.com/socialsatisfaction" },
@@ -6,12 +7,15 @@ const SOCIAL_LINKS = [
 ]
 
 export const Footer = () => {
+  const { content } = useContent()
+  const logoSrc = content.logo || "/satisfactionlogo.png"
+
   return (
     <footer className="relative overflow-hidden border-t border-white/10 bg-black px-8 pt-32 pb-12 md:px-16">
       <div className="relative z-10 grid grid-cols-1 gap-8 md:grid-cols-2 md:gap-12 lg:grid-cols-4 lg:gap-16">
         <div className="space-y-8">
           <img
-            src="/satisfactionlogo.png"
+            src={logoSrc}
             alt="Social Satisfaction"
             className="h-12 w-auto md:h-14"
           />

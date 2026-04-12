@@ -2,7 +2,7 @@ import { Link } from "react-router"
 import { SectionHeader } from "../../components/misc"
 
 const sections = [
-  { to: "hero", label: "Hero Banner", description: "Top metadata text — read only", badge: "READ ONLY" },
+  { to: "hero", label: "Hero Banner", description: "Edit the corner metadata labels on the hero section" },
   { to: "brands", label: "Brands Carousel", description: "Add, edit, or remove client brand names" },
   { to: "what-we-do", label: "What We Do / Why Different", description: "Two-panel copy blocks" },
   { to: "campaign", label: "Campaign Statement", description: "The 4-word animated tagline" },

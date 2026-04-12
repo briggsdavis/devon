@@ -288,6 +288,7 @@ export const DEFAULT_CONTENT = {
   categories: CATEGORIES,
   services: DEFAULT_SERVICES,
   brands: DEFAULT_BRANDS,
+  logo: "",  // empty = use static /satisfactionlogo.png
   // slugs pointing into CATEGORIES[*].projects[*]
   featuredSlugs: ["harvest-menu-drop", "behind-the-menu", "logo-pack"] as [string, string, string],
   hero: {
@@ -373,6 +374,13 @@ export const AdminContentProvider = ({ children }: { children: React.ReactNode }
       // ignore storage errors
     }
   }, [content])
+
+  // Keep the favicon in sync with the custom logo whenever it changes
+  useEffect(() => {
+    const favicon = document.querySelector('link[rel="icon"]') as HTMLLinkElement | null
+    if (!favicon) return
+    favicon.href = content.logo || "/satisfactionlogo.png"
+  }, [content.logo])
 
   const update = useCallback(<K extends keyof AdminContent>(section: K, value: AdminContent[K]) => {
     setContent((prev) => ({ ...prev, [section]: value }))

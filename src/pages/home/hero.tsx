@@ -1,5 +1,6 @@
 import { motion, useMotionValue, useTransform } from "motion/react"
 import { useEffect, useState } from "react"
+import { useContent } from "../../admin/context/content-context"
 import { LaptopScene } from "../../components/laptop-scene"
 import { useSmoothScroll } from "../../components/smooth-scroll"
 
@@ -38,20 +39,19 @@ export const HeroCanvas = () => {
 }
 
 export const Hero = () => {
+  const { content } = useContent()
+  const { topLeft, topRight, bottomLeft } = content.hero
+
   return (
     <section className="relative h-[300vh] bg-black">
       <div className="relative z-10 flex h-screen flex-col">
         {/* Top metadata bar */}
         <div className="flex items-start justify-between px-8 pt-28 pb-4 md:px-16">
-          <div className="text-xs leading-relaxed font-bold tracking-[0.35em] text-white/30 uppercase">
-            Marketing Agency
-            <br />
-            Creative Production
+          <div className="whitespace-pre-line text-xs leading-relaxed font-bold tracking-[0.35em] text-white/30 uppercase">
+            {topLeft}
           </div>
-          <div className="text-right text-xs leading-relaxed font-bold tracking-[0.35em] text-white/30 uppercase">
-            Social Satisfaction
-            <br />
-            Full-Service Agency
+          <div className="whitespace-pre-line text-right text-xs leading-relaxed font-bold tracking-[0.35em] text-white/30 uppercase">
+            {topRight}
           </div>
         </div>
 
@@ -61,7 +61,7 @@ export const Hero = () => {
         {/* Bottom metadata */}
         <div className="flex items-center justify-between px-8 py-4 md:px-16">
           <span className="text-xs font-bold tracking-[0.35em] text-white/15 uppercase">
-            Marketing Agency
+            {bottomLeft}
           </span>
           <span className="text-xs font-bold tracking-[0.35em] text-white/15 uppercase">
             Scroll ↓
