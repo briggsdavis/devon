@@ -122,7 +122,7 @@ const AboutCanvasInner = () => {
       className="pointer-events-none fixed inset-0 z-[1]"
       style={{
         opacity: ready ? 1 : 0,
-        transition: "opacity 1.5s ease",
+        transition: "opacity 4s ease",
       }}
     >
       <AboutModelScene onReady={() => setReady(true)} />
