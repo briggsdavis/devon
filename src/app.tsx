@@ -25,6 +25,7 @@ class CanvasErrorBoundary extends React.Component<
     return this.state.failed ? null : this.props.children
   }
 }
+import { AboutModelScene } from "./components/about-model-scene"
 import { Navbar } from "./components/navbar"
 import { SmoothScroll, SmoothScrollProvider } from "./components/smooth-scroll"
 import { About } from "./pages/about"
@@ -113,12 +114,25 @@ const ConditionalHeroCanvas = () => {
   )
 }
 
+const ConditionalAboutCanvas = () => {
+  const { pathname } = useLocation()
+  if (pathname !== "/about") return null
+  return (
+    <CanvasErrorBoundary>
+      <div className="pointer-events-none fixed inset-0 z-[1]">
+        <AboutModelScene />
+      </div>
+    </CanvasErrorBoundary>
+  )
+}
+
 const SiteRoot = () => (
   <>
     <CustomCursor />
     <Navbar />
     <SmoothScrollProvider>
       <ConditionalHeroCanvas />
+      <ConditionalAboutCanvas />
       <ColumnWipe>
         <SmoothScroll>
           <AppRoutes />
