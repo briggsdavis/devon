@@ -124,11 +124,8 @@ const AboutCanvasInner = () => {
         <AboutModelScene onReady={() => setCanvasReady(true)} />
       </motion.div>
 
-      {/* Black overlay — z-[2], darkens 3D but sits below column lines and text */}
-      <motion.div
-        className="pointer-events-none fixed inset-0 z-[2] bg-black/75"
-        style={{ opacity: scrollOpacity }}
-      />
+      {/* Black overlay — z-[2], permanent darkening layer above 3D but below content */}
+      <div className="pointer-events-none fixed inset-0 z-[2] bg-black/75" />
     </>
   )
 }
