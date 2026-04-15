@@ -1,5 +1,6 @@
 import { AnimatePresence, motion } from "motion/react"
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
+import { useLocation } from "react-router"
 import { TextReveal } from "../components/text-reveal"
 
 // ─── FAQ Data ─────────────────────────────────────────────────────────────────
@@ -266,6 +267,19 @@ const BlurIn = ({
 // ─── Contact page ─────────────────────────────────────────────────────────────
 export const Contact = () => {
   const [openFaq, setOpenFaq] = useState<string | null>(null)
+  const { hash } = useLocation()
+
+  useEffect(() => {
+    if (hash === "#faq") {
+      const el = document.getElementById("faq")
+      if (el) {
+        const timer = setTimeout(() => {
+          el.scrollIntoView({ behavior: "smooth" })
+        }, 400)
+        return () => clearTimeout(timer)
+      }
+    }
+  }, [hash])
 
   const toggleFaq = (key: string) =>
     setOpenFaq((prev) => (prev === key ? null : key))

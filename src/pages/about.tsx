@@ -1,16 +1,19 @@
 import {
   AnimatePresence,
+  MotionValue,
   motion,
   useMotionValue,
   useScroll,
   useTransform,
 } from "motion/react"
-import { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { Link } from "react-router"
 import { AboutHero } from "../components/about-hero"
 import { useSmoothScroll } from "../components/smooth-scroll"
+import { BrandsCarousel } from "./home/brands-carousel"
+import { FeaturedCascade } from "./home/featured-cascade"
 
-// Splits text into sentences and blurs each in on scroll
+// ─── BlurInLines ─────────────────────────────────────────────────────────────
 const BlurInLines = ({
   text,
   className,
@@ -30,11 +33,7 @@ const BlurInLines = ({
           initial={{ opacity: 0, filter: "blur(10px)", y: 10 }}
           whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
-          transition={{
-            duration: 1,
-            delay: i * 0.18,
-            ease: [0.22, 1, 0.36, 1],
-          }}
+          transition={{ duration: 1, delay: i * 0.18, ease: [0.22, 1, 0.36, 1] }}
         >
           {sentence}
         </motion.p>
@@ -43,6 +42,7 @@ const BlurInLines = ({
   )
 }
 
+// ─── Values data + card ───────────────────────────────────────────────────────
 const values = [
   {
     label: "CULTURE",
@@ -105,14 +105,11 @@ const timeline = [
 const ValueCard = ({ value }: { value: (typeof values)[0] }) => {
   const [isOpen, setIsOpen] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
-
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"],
   })
-
   const imgY = useTransform(scrollYProgress, [0, 1], ["15%", "-15%"])
-
   return (
     <motion.div
       ref={containerRef}
@@ -120,14 +117,9 @@ const ValueCard = ({ value }: { value: (typeof values)[0] }) => {
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-80px" }}
-      transition={{
-        duration: 0.7,
-        delay: value.delay,
-        ease: [0.22, 1, 0.36, 1],
-      }}
+      transition={{ duration: 0.7, delay: value.delay, ease: [0.22, 1, 0.36, 1] }}
       onClick={() => setIsOpen((v) => !v)}
     >
-      {/* Image with parallax */}
       <div className="relative aspect-2/3 w-full overflow-hidden">
         <motion.img
           src={value.img}
@@ -135,7 +127,6 @@ const ValueCard = ({ value }: { value: (typeof values)[0] }) => {
           className="absolute inset-0 h-[130%] w-full object-cover will-change-transform [backface-visibility:hidden]"
           style={{ y: imgY, top: "-15%" }}
         />
-        {/* Tag overlay */}
         <div className="absolute bottom-3 left-3 z-10">
           <span className="flex items-center gap-1.5 bg-black/85 px-2.5 py-1 text-xs font-bold tracking-[0.22em] text-white uppercase backdrop-blur-sm">
             <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-white/80" />
@@ -143,8 +134,6 @@ const ValueCard = ({ value }: { value: (typeof values)[0] }) => {
           </span>
         </div>
       </div>
-
-      {/* Inline expand drawer */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -154,9 +143,7 @@ const ValueCard = ({ value }: { value: (typeof values)[0] }) => {
             transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden"
           >
-            <p className="pt-4 text-xs leading-relaxed text-white/60">
-              {value.body}
-            </p>
+            <p className="pt-4 text-xs leading-relaxed text-white/60">{value.body}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -164,6 +151,198 @@ const ValueCard = ({ value }: { value: (typeof values)[0] }) => {
   )
 }
 
+// ─── Wheel section ────────────────────────────────────────────────────────────
+const WHEEL_PAIRS = [
+  {
+    number: "01",
+    heading: "Who We Are",
+    text: "Social Satisfaction, founded by Devon Colebank, transforms hospitality and lifestyle brands through cultural storytelling. We blend nostalgia with modern innovation to create resonant identities that bridge the gap between trend-forward messaging and striking visuals.",
+    img: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&q=80&w=900",
+  },
+  {
+    number: "02",
+    heading: "How We Work",
+    text: "We replace 'shoot and share' tactics with performance-driven campaigns. As an end-to-end partner, we manage everything from ideation to execution. This streamlined structure ensures every effort is intentional, cohesive, and designed to drive reservations.",
+    img: "https://images.unsplash.com/photo-1542744094-24638eff58bb?auto=format&fit=crop&q=80&w=900",
+  },
+  {
+    number: "03",
+    heading: "What We Deliver",
+    text: "By integrating strategy with internal production, we eliminate fragmented communication and multiple vendors. Every piece of content serves a business objective. The result is a consistent, optimized rollout that delivers measurable brand loyalty.",
+    img: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=900",
+  },
+]
+
+// Individual wheel item — hooks called at component level (not in a loop)
+const WheelPair = ({
+  item,
+  index,
+  n,
+  progress,
+}: {
+  item: (typeof WHEEL_PAIRS)[0]
+  index: number
+  n: number
+  progress: MotionValue<number>
+}) => {
+  const center = n === 1 ? 0 : index / (n - 1)
+
+  // Linear mapping: at progress=0 → rotateX for this item's distance from top,
+  //                 at progress=1 → rotateX for this item's distance from bottom
+  const rotateX = useTransform(progress, [0, 1], [center * -110, (center - 1) * -110])
+  const opacity = useTransform(
+    progress,
+    [
+      Math.max(0, center - 0.38),
+      Math.max(0, center - 0.1),
+      Math.min(1, center + 0.1),
+      Math.min(1, center + 0.22),
+    ],
+    [0.08, 1, 1, 0.08],
+  )
+  const yVal = useTransform(progress, [0, 1], [center * -80, (center - 1) * -80])
+
+  return (
+    <motion.div
+      style={{ rotateX, opacity, y: yVal }}
+      className="absolute inset-0 flex flex-col items-center justify-center gap-10 px-8 pt-24 md:flex-row md:gap-16 md:px-16"
+    >
+      {/* Left: text — always left-aligned */}
+      <div className="flex-1">
+        <p className="mb-3 text-xs font-bold tracking-[0.4em] text-white/30 uppercase">
+          {item.number}
+        </p>
+        <h3 className="massive-text mb-6 text-4xl leading-tight font-bold uppercase md:text-6xl lg:text-7xl">
+          {item.heading}
+        </h3>
+        <p className="max-w-lg text-lg leading-relaxed font-light text-white/70">
+          {item.text}
+        </p>
+      </div>
+
+      {/* Right: image */}
+      <div className="hidden w-[42%] shrink-0 md:block">
+        <div className="aspect-[4/5] overflow-hidden">
+          <img
+            src={item.img}
+            alt={item.heading}
+            className="h-full w-full object-cover"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </motion.div>
+  )
+}
+
+// Progress dots (right-side indicator)
+const WheelDot = ({
+  index,
+  n,
+  progress,
+}: {
+  index: number
+  n: number
+  progress: MotionValue<number>
+}) => {
+  const center = n === 1 ? 0 : index / (n - 1)
+  const dotOpacity = useTransform(
+    progress,
+    [Math.max(0, center - 0.3), center, Math.min(1, center + 0.3)],
+    [0.25, 1, 0.25],
+  )
+  const dotScale = useTransform(
+    progress,
+    [Math.max(0, center - 0.3), center, Math.min(1, center + 0.3)],
+    [0.7, 1.4, 0.7],
+  )
+  return (
+    <motion.div
+      className="h-1.5 w-1.5 rounded-full bg-white"
+      style={{ opacity: dotOpacity, scale: dotScale }}
+    />
+  )
+}
+
+const WheelSection = () => {
+  const wrapperRef = useRef<HTMLDivElement>(null)
+  const wrapperTopRef = useRef(0)
+  const pinDistRef = useRef(0)
+  const [pinDist, setPinDist] = useState(0)
+
+  const smoothY = useSmoothScroll()
+  const fallbackY = useMotionValue(0)
+  const activeY = smoothY ?? fallbackY
+
+  useEffect(() => {
+    const measure = () => {
+      const dist = window.innerHeight * (WHEEL_PAIRS.length - 1)
+      pinDistRef.current = dist
+      setPinDist(dist)
+      if (wrapperRef.current) {
+        const rect = wrapperRef.current.getBoundingClientRect()
+        wrapperTopRef.current = rect.top + (smoothY?.get() ?? 0)
+      }
+    }
+    requestAnimationFrame(() => requestAnimationFrame(measure))
+    window.addEventListener("resize", measure)
+    return () => window.removeEventListener("resize", measure)
+  }, [smoothY])
+
+  const pinY = useTransform(activeY, (y: number) => {
+    const T = wrapperTopRef.current
+    const D = pinDistRef.current
+    if (D === 0 || y <= T) return 0
+    if (y >= T + D) return D
+    return y - T
+  })
+
+  const progress = useTransform(activeY, (y: number) => {
+    const T = wrapperTopRef.current
+    const D = pinDistRef.current
+    if (D === 0 || y <= T) return 0
+    if (y >= T + D) return 1
+    return (y - T) / D
+  })
+
+  return (
+    <div
+      ref={wrapperRef}
+      className="relative"
+      style={{ height: `calc(${pinDist}px + 100vh)` }}
+    >
+      <motion.div
+        style={{ y: pinY }}
+        className="relative h-screen bg-black"
+      >
+        {/* Right-side progress dots */}
+        <div className="pointer-events-none absolute right-8 top-1/2 z-10 flex -translate-y-1/2 flex-col gap-3 md:right-16">
+          {WHEEL_PAIRS.map((_, i) => (
+            <WheelDot key={i} index={i} n={WHEEL_PAIRS.length} progress={progress} />
+          ))}
+        </div>
+
+        {/* 3D perspective container — clips and gives depth */}
+        <div
+          className="h-full"
+          style={{ perspective: "1400px", perspectiveOrigin: "50% 50%" }}
+        >
+          {WHEEL_PAIRS.map((item, i) => (
+            <WheelPair
+              key={i}
+              item={item}
+              index={i}
+              n={WHEEL_PAIRS.length}
+              progress={progress}
+            />
+          ))}
+        </div>
+      </motion.div>
+    </div>
+  )
+}
+
+// ─── About page ───────────────────────────────────────────────────────────────
 export const About = () => {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const horizontalRef = useRef<HTMLDivElement>(null)
@@ -173,7 +352,6 @@ export const About = () => {
   const fallbackY = useMotionValue(0)
   const activeY = smoothY ?? fallbackY
 
-  // Fade content in gradually over ~30% of viewport height after the WHO WE ARE hero exits
   const heroEnd = typeof window !== "undefined" ? window.innerHeight * 0.5 : 0
   const contentOpacity = useTransform(
     activeY,
@@ -223,11 +401,20 @@ export const About = () => {
     return -(y - T)
   })
 
+  // Progress for the timeline indicator line (0 → 1)
+  const timelineProgress = useTransform(activeY, (y: number) => {
+    const T = wrapperTopRef.current
+    const D = scrollDistanceRef.current
+    if (D === 0 || y <= T) return 0
+    if (y >= T + D) return 1
+    return (y - T) / D
+  })
+
   return (
     <>
       <AboutHero />
 
-      {/* Decorative column lines — fade in with scroll, same timing as text */}
+      {/* Decorative column lines */}
       {[...Array(7)].map((_, i) => (
         <motion.div
           key={i}
@@ -241,7 +428,11 @@ export const About = () => {
       ))}
 
       <motion.div style={{ opacity: contentOpacity }} className="pt-[62vh]">
-        {/* Three staggered paragraphs — line-by-line blur-in */}
+
+        {/* ── Wheel section (new) ───────────────────────────────────────── */}
+        <WheelSection />
+
+        {/* ── Three staggered paragraphs ────────────────────────────────── */}
         <div className="mb-12 px-8 md:px-16">
           <div className="flex justify-start">
             <BlurInLines
@@ -252,9 +443,7 @@ export const About = () => {
           <div className="mt-32 flex justify-end">
             <BlurInLines
               className="about-glow-text max-w-sm text-right"
-              text={
-                "We replace \u201cshoot and share\u201d tactics with performance-driven campaigns. As an end-to-end partner, we manage everything from ideation to execution. This streamlined structure ensures every effort is intentional, cohesive, and designed to drive reservations."
-              }
+              text="We replace \u201cshoot and share\u201d tactics with performance-driven campaigns. As an end-to-end partner, we manage everything from ideation to execution. This streamlined structure ensures every effort is intentional, cohesive, and designed to drive reservations."
               align="text-right"
             />
           </div>
@@ -267,7 +456,7 @@ export const About = () => {
           </div>
         </div>
 
-        {/* Portfolio Timeline — header pinned inside scrolling section */}
+        {/* ── Portfolio Timeline ────────────────────────────────────────── */}
         <div
           ref={wrapperRef}
           className="relative"
@@ -283,11 +472,23 @@ export const About = () => {
                 PORTFOLIO
               </h2>
               <h3 className="mt-1 text-3xl font-bold tracking-tight uppercase md:text-5xl">
-                PAST PROJECTS & CLIENTS
+                PAST PROJECTS &amp; CLIENTS
               </h3>
             </div>
+
+            {/* Progress line */}
+            <div className="relative mx-8 mt-5 mb-1 h-px bg-white/10 md:mx-16">
+              <motion.div
+                className="absolute inset-y-0 left-0 h-full bg-white/60"
+                style={{
+                  scaleX: timelineProgress,
+                  transformOrigin: "left center",
+                }}
+              />
+            </div>
+
             {/* Scrolling cards */}
-            <div className="ml-8 flex flex-1 items-start overflow-hidden pt-6 md:ml-16">
+            <div className="ml-8 flex flex-1 items-start overflow-hidden pt-5 md:ml-16">
               <motion.div
                 ref={horizontalRef}
                 style={{ x }}
@@ -326,7 +527,7 @@ export const About = () => {
           </motion.div>
         </div>
 
-        {/* Values Images — three staggered portrait images, click to expand text */}
+        {/* ── Values Images ─────────────────────────────────────────────── */}
         <div className="px-8 pt-[54px] pb-6 md:px-16 md:pt-[82px] md:pb-8">
           <div className="flex items-start gap-3 md:gap-5">
             {values.map((value) => (
@@ -335,12 +536,19 @@ export const About = () => {
           </div>
         </div>
 
-        {/* Discover Our Services CTA */}
+        {/* ── Discover CTA ──────────────────────────────────────────────── */}
         <div className="flex justify-center py-12">
           <Link to="/services" className="btn-industrial">
             Discover Our Services
           </Link>
         </div>
+
+        {/* ── Brands carousel ───────────────────────────────────────────── */}
+        <BrandsCarousel />
+
+        {/* ── Featured projects ─────────────────────────────────────────── */}
+        <FeaturedCascade />
+
       </motion.div>
     </>
   )
