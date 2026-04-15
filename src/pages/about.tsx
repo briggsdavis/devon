@@ -186,21 +186,34 @@ const WheelPair = ({
   progress: MotionValue<number>
 }) => {
   const center = n === 1 ? 0 : index / (n - 1)
+  const step = n === 1 ? 1 : 1 / (n - 1)
 
-  // Linear mapping: at progress=0 → rotateX for this item's distance from top,
-  //                 at progress=1 → rotateX for this item's distance from bottom
-  const rotateX = useTransform(progress, [0, 1], [center * -110, (center - 1) * -110])
-  const opacity = useTransform(
-    progress,
-    [
-      Math.max(0, center - 0.38),
-      Math.max(0, center - 0.1),
-      Math.min(1, center + 0.1),
-      Math.min(1, center + 0.22),
-    ],
-    [0.08, 1, 1, 0.08],
-  )
-  const yVal = useTransform(progress, [0, 1], [center * -80, (center - 1) * -80])
+  // Crossfade at handoff points so combined opacity = 1 during transitions.
+  // This means the 3D canvas behind shows through instead of a black gap.
+  const FADE = 0.025
+  const handoffBefore = Math.max(0, center - step / 2)
+  const handoffAfter = Math.min(1, center + step / 2)
+
+  let opKf: number[], opVals: number[]
+  if (index === 0) {
+    opKf = [0, handoffAfter - FADE, handoffAfter + FADE]
+    opVals = [1, 1, 0]
+  } else if (index === n - 1) {
+    opKf = [handoffBefore - FADE, handoffBefore + FADE, 1]
+    opVals = [0, 1, 1]
+  } else {
+    opKf = [
+      handoffBefore - FADE,
+      handoffBefore + FADE,
+      handoffAfter - FADE,
+      handoffAfter + FADE,
+    ]
+    opVals = [0, 1, 1, 0]
+  }
+
+  const rotateX = useTransform(progress, [0, 1], [center * -90, (center - 1) * -90])
+  const opacity = useTransform(progress, opKf, opVals)
+  const yVal = useTransform(progress, [0, 1], [center * -60, (center - 1) * -60])
 
   return (
     <motion.div
@@ -313,7 +326,7 @@ const WheelSection = () => {
     >
       <motion.div
         style={{ y: pinY }}
-        className="relative h-screen bg-black"
+        className="relative h-screen overflow-hidden"
       >
         {/* Right-side progress dots */}
         <div className="pointer-events-none absolute right-8 top-1/2 z-10 flex -translate-y-1/2 flex-col gap-3 md:right-16">
@@ -382,6 +395,16 @@ export const About = () => {
     window.addEventListener("resize", measure)
     return () => window.removeEventListener("resize", measure)
   }, [smoothY])
+
+  // Keep wrapperTopRef accurate even after layout shifts (e.g. WheelSection
+  // setting its pinDist state after initial mount changes content height above).
+  useEffect(() => {
+    return activeY.on("change", (y: number) => {
+      if (wrapperRef.current) {
+        wrapperTopRef.current = wrapperRef.current.getBoundingClientRect().top + y
+      }
+    })
+  }, [activeY])
 
   const pinY = useTransform(activeY, (y: number) => {
     const T = wrapperTopRef.current
