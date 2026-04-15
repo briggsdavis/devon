@@ -116,6 +116,20 @@ const SERVICES = [
     inverted: false,
     minH: "min-h-[524px]",
   },
+  {
+    name: "Videography",
+    tag: "Video",
+    desc: "Professional video production: brand films, reels, event coverage, and scroll-stopping content.",
+    bullets: [
+      "Brand films + short-form video",
+      "Social media reels + TikTok content",
+      "Event coverage + recap videos",
+      "Product + promotional video",
+      "Testimonial + interview production",
+    ],
+    inverted: true,
+    minH: "min-h-[414px]",
+  },
 ]
 
 const ServiceCell = ({

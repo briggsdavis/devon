@@ -36,7 +36,7 @@ import {
 import { About } from "./pages/about"
 import { CategoryPage } from "./pages/category"
 import { Contact } from "./pages/contact"
-import { BrandsCarousel } from "./pages/home/brands-carousel"
+import { BrandsCarousel, LogosCarousel } from "./pages/home/brands-carousel"
 import { CampaignStatement } from "./pages/home/campaign-statement"
 import { FaqCta } from "./pages/home/faq-cta"
 import { FeaturedCascade } from "./pages/home/featured-cascade"
@@ -64,8 +64,9 @@ const Home = () => (
       />
     ))}
     <Hero />
-    <StatsGrid />
     <BrandsCarousel />
+    <StatsGrid />
+    <LogosCarousel />
     <WhatWeDoSection />
     <CampaignStatement />
     <FeaturedCascade />
