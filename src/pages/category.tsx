@@ -1,5 +1,5 @@
 import { motion, useMotionValue, useTransform } from "motion/react"
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef } from "react"
 import { Link, useParams } from "react-router"
 import { useSmoothScroll } from "../components/smooth-scroll"
 import { TextReveal } from "../components/text-reveal"
@@ -182,27 +182,60 @@ const MasonryGrid = ({
   return <>{rows}</>
 }
 
-// ─── Hero header with sticky title ───────────────────────────────────────────
-// The SmoothScroll container is position:fixed, translated by -smoothY.
-// Applying y:smoothY to the title div counteracts the container movement → title
-// stays pinned to its initial viewport position.
-// Clamped at window.innerHeight: once the hero image has fully scrolled away,
-// the title begins scrolling normally (upward) off screen.
+// ─── Hero header: centered title → sticks to top on scroll ───────────────────
+//
+// Two-phase crossfade driven by SmoothScroll's smoothY MotionValue:
+//
+// Phase 1  (smoothY < crossover)
+//   Centered title has no y-transform — it scrolls up naturally with the page.
+//   viewport_y = sectionTop + vh/2 − titleH/2 − smoothY
+//
+// Phase 2  (smoothY > crossover)
+//   Pinned title: y = activeY counteracts the container's −smoothY translation,
+//   keeping the element fixed at top-0 in the viewport (content below pt-24
+//   clears the navbar).
+//
+// Crossover point: smoothY at which the centered title's top reaches navH (96px).
+//   crossover = (vh − titleH) / 2 − navH
+//
+// A 60px opacity crossfade blends the two phases seamlessly.
 const CategoryHero = ({ category }: { category: Category }) => {
   const smoothY = useSmoothScroll()
   const fallbackY = useMotionValue(0)
   const activeY = smoothY ?? fallbackY
-  const [vh, setVh] = useState(typeof window !== "undefined" ? window.innerHeight : 800)
+
+  const centeredRef = useRef<HTMLDivElement>(null)
+  const crossoverRef = useRef(0)
+  const NAV_H = 96 // px — matches pt-24
+  const FADE = 30 // px half-width of crossfade
 
   useEffect(() => {
-    const update = () => setVh(window.innerHeight)
-    window.addEventListener("resize", update)
-    return () => window.removeEventListener("resize", update)
+    const measure = () => {
+      const titleH = centeredRef.current?.offsetHeight ?? 0
+      crossoverRef.current = Math.max(0, (window.innerHeight - titleH) / 2 - NAV_H)
+    }
+    measure()
+    window.addEventListener("resize", measure)
+    return () => window.removeEventListener("resize", measure)
   }, [])
 
-  // Counteract scroll until we've scrolled one full viewport height,
-  // then let the title scroll away naturally.
-  const titleY = useTransform(activeY, (y) => Math.min(y, vh))
+  const centeredOpacity = useTransform(activeY, (y) => {
+    const co = crossoverRef.current
+    const lo = Math.max(0, co - FADE)
+    const hi = co + FADE
+    if (y <= lo) return 1
+    if (y >= hi) return 0
+    return 1 - (y - lo) / (hi - lo)
+  })
+
+  const pinnedOpacity = useTransform(activeY, (y) => {
+    const co = crossoverRef.current
+    const lo = Math.max(0, co - FADE)
+    const hi = co + FADE
+    if (y <= lo) return 0
+    if (y >= hi) return 1
+    return (y - lo) / (hi - lo)
+  })
 
   return (
     <section className="relative h-screen">
@@ -213,25 +246,32 @@ const CategoryHero = ({ category }: { category: Category }) => {
           alt={category.name}
           className="h-full w-full object-cover"
         />
-        {/* Base image darkening */}
-        <div className="absolute inset-0 bg-black/55" />
+        <div className="absolute inset-0 bg-black/50" />
       </div>
 
-      {/* Title bar — pinned to top of viewport while hero scrolls away.
-          y:min(smoothY,vh) counteracts the SmoothScroll container's -smoothY
-          transform, keeping the bar at y=0 in the viewport until the hero
-          section has fully scrolled past, then the title exits upward. */}
+      {/* Phase 1: centered — no y-transform, scrolls with the page */}
       <motion.div
-        style={{ y: titleY }}
-        className="absolute inset-x-0 top-0 z-50 pb-16"
+        style={{ opacity: centeredOpacity }}
+        className="pointer-events-none absolute inset-0 flex items-center justify-center px-8 md:px-16"
       >
-        {/* Dark gradient — fades from opaque at top to transparent below */}
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-full bg-gradient-to-b from-black/95 via-black/70 to-transparent" />
+        <div ref={centeredRef} className="text-center">
+          <TextReveal
+            text={category.name.toUpperCase()}
+            className="massive-text justify-center text-4xl leading-none md:text-7xl lg:text-9xl"
+          />
+        </div>
+      </motion.div>
 
-        <div className="relative px-8 pt-24 md:px-16 md:pt-28">
+      {/* Phase 2: pinned — y:activeY cancels -smoothY, locks element at top-0 */}
+      <motion.div
+        style={{ y: activeY, opacity: pinnedOpacity }}
+        className="pointer-events-none absolute inset-x-0 top-0 z-50"
+      >
+        <div className="bg-gradient-to-b from-black/95 via-black/75 to-transparent px-8 pt-24 pb-20 md:px-16 md:pt-28">
           <TextReveal
             text={category.name.toUpperCase()}
             className="massive-text text-4xl leading-none md:text-7xl lg:text-9xl"
+            immediate
           />
         </div>
       </motion.div>
