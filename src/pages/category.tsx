@@ -267,10 +267,10 @@ const CategoryHero = ({ category }: { category: Category }) => {
         style={{ y: activeY, opacity: pinnedOpacity }}
         className="pointer-events-none absolute inset-x-0 top-0 z-50"
       >
-        <div className="bg-gradient-to-b from-black/95 via-black/75 to-transparent px-8 pt-24 pb-20 md:px-16 md:pt-28">
+        <div className="bg-gradient-to-b from-black/95 via-black/75 to-transparent px-8 pt-24 pb-20 text-center md:px-16 md:pt-28">
           <TextReveal
             text={category.name.toUpperCase()}
-            className="massive-text text-4xl leading-none md:text-7xl lg:text-9xl"
+            className="massive-text justify-center text-4xl leading-none md:text-7xl lg:text-9xl"
             immediate
           />
         </div>
