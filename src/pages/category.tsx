@@ -217,31 +217,21 @@ const CategoryHero = ({ category }: { category: Category }) => {
         <div className="absolute inset-0 bg-black/55" />
       </div>
 
-      {/* Title panel — stays pinned while hero scrolls away.
-          z-50 ensures it floats above subsequent page sections.
-          The gradient provides a dark background for legibility over any content. */}
+      {/* Title bar — pinned to top of viewport while hero scrolls away.
+          y:min(smoothY,vh) counteracts the SmoothScroll container's -smoothY
+          transform, keeping the bar at y=0 in the viewport until the hero
+          section has fully scrolled past, then the title exits upward. */}
       <motion.div
         style={{ y: titleY }}
-        className="absolute inset-0 z-50 flex flex-col items-center justify-center"
+        className="absolute inset-x-0 top-0 z-50 pb-16"
       >
-        {/* Dark veil — keeps text legible over whatever is behind */}
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/80 via-black/65 to-black/80" />
+        {/* Dark gradient — fades from opaque at top to transparent below */}
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-full bg-gradient-to-b from-black/95 via-black/70 to-transparent" />
 
-        {/* Content */}
-        <div className="relative z-10 flex flex-col items-center gap-6 px-8 text-center md:px-16">
-          {/* Navbar clearance */}
-          <div className="h-16 md:h-20" />
-
-          <Link
-            to="/portfolio"
-            className="text-xs font-bold tracking-[0.4em] text-white/40 uppercase transition-colors hover:text-white"
-          >
-            ← Portfolio
-          </Link>
-
+        <div className="relative px-8 pt-24 md:px-16 md:pt-28">
           <TextReveal
             text={category.name.toUpperCase()}
-            className="massive-text justify-center text-4xl leading-none md:text-7xl lg:text-9xl"
+            className="massive-text text-4xl leading-none md:text-7xl lg:text-9xl"
           />
         </div>
       </motion.div>
