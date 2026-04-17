@@ -7,7 +7,7 @@ import * as THREE from "three"
 // ─── Loaded Laptop Model ────────────────────────────────────────────────────
 function Laptop({ scrollProgress }: { scrollProgress: MotionValue<number> }) {
   const groupRef = useRef<THREE.Group>(null)
-  const { scene: originalScene } = useGLTF("/macbook.glb")
+  const { scene: originalScene } = useGLTF("/imac.glb")
   const scene = useMemo(() => originalScene.clone(true), [originalScene])
 
   // Derive normalization transform from the original geometry (immutable)
@@ -48,7 +48,7 @@ function Laptop({ scrollProgress }: { scrollProgress: MotionValue<number> }) {
 }
 
 // Preload the model
-useGLTF.preload("/macbook.glb")
+useGLTF.preload("/imac.glb")
 
 // ─── Scene ──────────────────────────────────────────────────────────────────
 function Scene({ scrollProgress }: { scrollProgress: MotionValue<number> }) {
