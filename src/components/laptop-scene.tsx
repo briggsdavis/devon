@@ -29,9 +29,9 @@ function Laptop({ scrollProgress }: { scrollProgress: MotionValue<number> }) {
     const t = scrollProgress.get()
 
     // Start far away, come close to fill the screen
-    groupRef.current.position.z = THREE.MathUtils.lerp(-15, 2.5, t)
-    // Lower the laptop so the screen ends up at eye level when close
-    groupRef.current.position.y = THREE.MathUtils.lerp(0, 0.1, t)
+    groupRef.current.position.z = THREE.MathUtils.lerp(-15, 1.8, t)
+    // Lower the model so it sits below the nav bar with small gaps top and bottom
+    groupRef.current.position.y = THREE.MathUtils.lerp(0, -0.4, t)
     // Slight tilt throughout
     groupRef.current.rotation.x = THREE.MathUtils.lerp(0.25, 0.1, t)
     // Slight Y rotation at start for visual interest
