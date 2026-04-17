@@ -43,6 +43,7 @@ import { FeaturedCascade } from "./pages/home/featured-cascade"
 import { HeroCanvas, Hero } from "./pages/home/hero"
 import { StatsGrid } from "./pages/home/stats-grid"
 import { WhatWeDoSection } from "./pages/home/what-we-do"
+import { Credits } from "./pages/credits"
 import { NotFound } from "./pages/not-found"
 import { Portfolio } from "./pages/portfolio"
 import { ProjectPage } from "./pages/project-page"
@@ -86,6 +87,7 @@ const AppRoutes = () => {
       <Route path="/portfolio/:category" element={<CategoryPage />} />
       <Route path="/portfolio/:category/:project" element={<ProjectPage />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/credits" element={<Credits />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   )
