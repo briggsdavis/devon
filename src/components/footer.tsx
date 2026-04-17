@@ -90,17 +90,25 @@ export const Footer = () => {
         <p className="text-xs tracking-widest text-white/15 uppercase">
           © {new Date().getFullYear()} Social Satisfaction. All Rights Reserved
         </p>
-        <p className="text-xs tracking-widest text-white/15 uppercase">
-          Made by{" "}
-          <a
-            href="https://www.briggsdavis.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="transition-colors hover:text-white/60"
+        <div className="flex items-center gap-6">
+          <Link
+            to="/credits"
+            className="text-xs tracking-widest text-white/15 uppercase transition-colors hover:text-white/40"
           >
-            BriggsDavis
-          </a>
-        </p>
+            Credits
+          </Link>
+          <p className="text-xs tracking-widest text-white/15 uppercase">
+            Made by{" "}
+            <a
+              href="https://www.briggsdavis.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors hover:text-white/60"
+            >
+              BriggsDavis
+            </a>
+          </p>
+        </div>
       </div>
 
     </footer>

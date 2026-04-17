@@ -7,7 +7,7 @@ import * as THREE from "three"
 // ─── Loaded Laptop Model ────────────────────────────────────────────────────
 function Laptop({ scrollProgress }: { scrollProgress: MotionValue<number> }) {
   const groupRef = useRef<THREE.Group>(null)
-  const { scene: originalScene } = useGLTF("/macbook.glb")
+  const { scene: originalScene } = useGLTF("/imac.glb")
   const scene = useMemo(() => originalScene.clone(true), [originalScene])
 
   // Derive normalization transform from the original geometry (immutable)
@@ -29,9 +29,9 @@ function Laptop({ scrollProgress }: { scrollProgress: MotionValue<number> }) {
     const t = scrollProgress.get()
 
     // Start far away, come close to fill the screen
-    groupRef.current.position.z = THREE.MathUtils.lerp(-15, 2.5, t)
-    // Lower the laptop so the screen ends up at eye level when close
-    groupRef.current.position.y = THREE.MathUtils.lerp(0, 0.1, t)
+    groupRef.current.position.z = THREE.MathUtils.lerp(-15, 2.65, t)
+    // Center model in zone below nav: ~0.75× nav-height gap on top, 1.5× on bottom
+    groupRef.current.position.y = THREE.MathUtils.lerp(0, -0.13, t)
     // Slight tilt throughout
     groupRef.current.rotation.x = THREE.MathUtils.lerp(0.25, 0.1, t)
     // Slight Y rotation at start for visual interest
@@ -48,7 +48,7 @@ function Laptop({ scrollProgress }: { scrollProgress: MotionValue<number> }) {
 }
 
 // Preload the model
-useGLTF.preload("/macbook.glb")
+useGLTF.preload("/imac.glb")
 
 // ─── Scene ──────────────────────────────────────────────────────────────────
 function Scene({ scrollProgress }: { scrollProgress: MotionValue<number> }) {
